@@ -151,38 +151,8 @@ footer {
 }
 
 
-.card {
-    font-family: Lalezar;
-    margin-top: 100px;
-    margin-left: 210px;
-    direction: rtl;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 30px;
-    padding: 10px;
-    box-shadow: 0 5px 4px 0 #1A3B5E;
-    width: 70%;
-    height: 480px;
-    background-color: #FBAE54;
-    border: #b5773a solid 5px;
-}
 
-.left-container {
-    background-color: #A0DBE0;
 
-    flex: 1;
-    max-width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height:430px;
-    padding: 10px;
-    margin: 30px;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 #1A3B5E;
-}
 
 .right-container {
     background-color: #A0DBE0;

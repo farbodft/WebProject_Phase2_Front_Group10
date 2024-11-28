@@ -11,27 +11,29 @@ const ProfileCard = () => {
             </div>
             <div className="right-container">
                 <h3 className="gradienttext">اطلاعات بازیکن</h3>
-                <table>
+                <table className="player-info-table">
+                    <tbody>
                     <tr>
-                        <td>نام کاربری :</td>
-                        <td>mobina</td>
+                        <td className="label">نام کاربری :</td>
+                        <td className="value">mobina</td>
                     </tr>
                     <tr>
-                        <td>تعداد پاسخ ها :</td>
-                        <td>35</td>
+                        <td className="label">تعداد پاسخ ها :</td>
+                        <td className="value">35</td>
                     </tr>
                     <tr>
-                        <td>ایمیل :</td>
-                        <td>mobina.rashidi03@gmail.com</td>
+                        <td className="label">ایمیل :</td>
+                        <td className="value">mobina.rashidi03@gmail.com</td>
                     </tr>
                     <tr>
-                        <td>تعداد دنبال کننده ها :</td>
-                        <td>123</td>
+                        <td className="label">تعداد دنبال کننده ها :</td>
+                        <td className="value">123</td>
                     </tr>
                     <tr>
-                        <td>تعداد دنبال شونده ها :</td>
-                        <td>200</td>
+                        <td className="label">تعداد دنبال شونده ها :</td>
+                        <td className="value">200</td>
                     </tr>
+                    </tbody>
                 </table>
                 <div className="credit">برای شروع بازی به بخش مدیریت سوال ها بروید!</div>
             </div>
