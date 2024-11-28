@@ -1,0 +1,81 @@
+@font-face {
+    font-family: Lalezar;
+    src: url("/src/Font/Lalezar-Regular.ttf");
+    font-weight: normal;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+}
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 5px 4px 0 #FBAE54;
+    font-family: Lalezar;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A0DBE0;
+    padding: 10px 10px;
+    color: white;
+    font-size: 17px;
+
+}
+
+/* Button styling */
+.navbar-btn {
+    font-family: Lalezar;
+    background-color: #FBAE54;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 70px;
+}
+
+.navbar-btn:hover {
+    background-color: #FBAE80;
+}
+
+/* Right section (links and logo together on the right) */
+.right-section {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push the right section to the right */
+}
+
+/* Logo styling */
+.logo img {
+    height: 45px;
+    width: 80px; /* Ensure it is square */
+
+}
+
+/* Navbar links */
+.nav-links {
+    display: flex;
+    margin-right: 20px; /* Space between links and the logo */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-left: 20px;
+}
+
+.nav-links a:hover {
+    background-color: #FBAE80;
+    border-radius: 4px;
+}

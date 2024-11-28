@@ -1,0 +1,299 @@
+@font-face {
+    font-family: Lalezar;
+    src: url("/src/Font/Lalezar-Regular.ttf");
+    font-weight: normal;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+}
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 5px 4px 0 #FBAE54;
+    font-family: Lalezar;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A0DBE0;
+    padding: 10px 10px;
+    color: white;
+    font-size: 17px;
+
+}
+
+/* Button styling */
+.navbar-btn {
+    font-family: Lalezar;
+    background-color: #FBAE54;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 70px;
+}
+
+.navbar-btn:hover {
+    background-color: #FBAE80;
+}
+
+/* Right section (links and logo together on the right) */
+.right-section {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Push the right section to the right */
+}
+
+/* Logo styling */
+.logo img {
+    height: 45px;
+    width: 80px; /* Ensure it is square */
+
+}
+
+/* Navbar links */
+.nav-links {
+    display: flex;
+    margin-right: 20px; /* Space between links and the logo */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-left: 20px;
+}
+
+.nav-links a:hover {
+    background-color: #FBAE80;
+    border-radius: 4px;
+}
+
+
+/* Footer reset */
+footer {
+    background-color: #132C47;
+    color: white;
+    padding: 25px 0;
+    text-align: center;
+    margin-top: 220px;
+    box-shadow: 0 -5px 5px #FBAE54;
+    direction: rtl;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem; /* title size */
+    font-weight: 500;
+    font-family: Lalezar;
+    direction: rtl;
+    text-shadow: #A0DBE0 1px 1px 0;
+}
+
+.footer-content p {
+    margin: 10px 0 15px;
+    font-size: 1rem;
+    color: white; /* white text for description */
+    direction: rtl;
+}
+
+/* Social icons styling */
+.socials {
+    list-style: none;
+    padding: 0;
+}
+
+.socials li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.socials li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.socials li a:hover {
+    color: #fba54b; /* Change color when hover */
+}
+
+/* Footer bottom */
+.footer-bottom {
+    direction: rtl;
+    background-color: #1A3B5E; /* lighter background for bottom section */
+    padding: 20px 0;
+    font-size: 0.9rem;
+
+}
+
+.footer-bottom span {
+    color: #fba54b;
+    direction: rtl;
+    position: relative;
+}
+
+.footer-bottom p {
+    direction: rtl;
+    margin: 0;
+    color: #bbb; /* text for copyright info */
+}
+
+
+.card {
+    font-family: Lalezar;
+    margin-top: 100px;
+    margin-left: 210px;
+    direction: rtl;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 0 5px 4px 0 #1A3B5E;
+    width: 70%;
+    height: 480px;
+    background-color: #FBAE54;
+    border: #b5773a solid 5px;
+}
+
+.left-container {
+    background-color: #A0DBE0;
+
+    flex: 1;
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:430px;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 #1A3B5E;
+}
+
+.right-container {
+    background-color: #A0DBE0;
+    flex: 1;
+    max-width:70%;
+    height:430px;
+    padding: 10px;
+    margin: 20px;
+    border-radius:30px;
+    box-shadow: 0 4px 8px 0 #1A3B5E;
+    display: block;
+}
+@media only screen and (max-width: 860px) {
+    .card
+    {
+        flex-direction: column;
+        margin: 10px;
+        height: auto;
+        width: 90%;
+    }
+    .left-container{
+        flex: 1;
+        max-width:100%;
+    }
+    .right-container{
+        flex: 1;
+        max-width: 100%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .card
+    {
+        flex-direction: column;
+        margin: 10px;
+    }
+    .left-container{
+        flex: 1;
+        max-width:100%;
+    }
+    .right-container{
+        flex: 1;
+        max-width: 100%;
+    }
+}
+.profile {
+    width: 200px;
+    height: 200px;
+    max-width: 200px;
+    border-radius: 50%;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 #1A3B5E;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.gradienttext{
+    text-shadow: 0px 3px 0px #FBAE54;
+    color: white;
+    -webkit-background-clip: text;
+}
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color:aliceblue;
+}
+
+table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 280px;
+    border-collapse: collapse;
+}
+
+td {
+
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+}
+
+td:first-child {
+    font-weight: bold;
+    text-shadow: 0px 3px 0px #FBAE54;
+    color: #333333;
+}
+.credit a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 800;
+}
+
+.credit {
+    color: #fff;
+    text-align: center;
+    margin-top: 10px;
+    font-family:Lalezar;
+}
+
+
+
+
+
+
