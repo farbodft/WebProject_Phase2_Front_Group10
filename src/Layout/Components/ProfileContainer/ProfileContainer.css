@@ -1,0 +1,168 @@
+@font-face {
+    font-family: Lalezar;
+    src: url("/src/Font/Lalezar-Regular.ttf");
+    font-weight: normal;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+}
+
+/* Container to position profile cards */
+.profile-container {
+    position: relative;
+}
+
+/* Profile card styling */
+.profile-card {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 150px;
+    width: 250px;
+    background: #fff;
+    padding: unset;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Show profile card on image focus */
+.profile-trigger:focus + .profile-card {
+    display: inline-block;
+}
+
+/* Keep the profile card visible while focused */
+.profile-card:focus-within {
+    display: inline-block;
+}
+
+/* Profile card header styling */
+.profile-card header img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.profile-card h1 {
+    direction: rtl;
+    margin: 10px 0 0;
+    font-size: 18px;
+    color: #A0DBE0;
+    text-shadow: none;
+}
+
+.profile-card h2 {
+    direction: rtl;
+    font-size: 14px;
+    color: #888;
+    text-shadow: none;
+}
+
+.profile-bio p{
+    color: #A0DBE0;
+    text-shadow: none;
+    font-size: 17px;
+    font-weight: normal;
+}
+
+/* Profile card button styling */
+.profile-card button {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #6c7ae0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Lalezar;
+}
+
+.profile-card button:hover {
+    background-color: #5a65c1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .ranking-table {
+        width: 90%; /* Expand the table to take up more width */
+        margin-left: auto; /* Center it horizontally */
+        margin-right: auto;
+    }
+    .profile-card {
+        left: 50%; /* Center the profile card more on tablets */
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .ranking-table {
+        width: 95%; /* Expand table for smaller devices */
+    }
+    .ranking-table th, .ranking-table td {
+        padding: 10px;
+        font-size: 14px; /* Reduce text size for readability */
+    }
+
+    .profile-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .profile-card {
+        width: 220px; /* Smaller profile card */
+        left: 50%; /* Center profile card */
+        transform: translateX(-50%);
+    }
+
+    .profile-card header img {
+        width: 80px;
+    }
+
+    .profile-card h1 {
+        font-size: 16px;
+    }
+
+    .profile-card h2 {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ranking-table {
+        width: 100%;
+
+        margin-top: 30px;
+    }
+
+    .profile-card {
+        width: 200px; /* Smaller profile card for small screens */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .profile-card header img {
+        width: 70px;
+    }
+
+    .profile-card h1 {
+        font-size: 14px;
+    }
+
+    .profile-card h2 {
+        font-size: 12px;
+    }
+
+    .profile-img {
+        width: 35px;
+        height: 35px;
+    }
+}

@@ -1,7 +1,15 @@
 import React from 'react';
-
+import Navbar from "../../Components/Navbar/Navbar";
+import Footer from "../../Components/Footer/Footer";
+import RankingTable from "../../Components/RankingTable/RankingTable";
 const ScoreTable = () => {
-    return <div>جدول امتیازات</div>;
+    return (
+        <div>
+            <Navbar/>
+            <RankingTable/>
+            <Footer/>
+        </div>
+    );
 };
 
 export default ScoreTable;
