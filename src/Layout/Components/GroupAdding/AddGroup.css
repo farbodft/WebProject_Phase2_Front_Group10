@@ -121,6 +121,24 @@ body {
     direction: rtl;
 }
 
+.question_marks {
+    font-family: Lalezar;
+    font-size: 1.2em;
+    color: #FBAE54;
+    background-color: #132C47;
+    height: 90px;
+    width: 50%;
+    align-content: center;
+    margin: auto;  /* Automatically center horizontally and vertically */
+    position: absolute;  /* Position it inside the parent */
+    top: 40%;  /* Move to the vertical center */
+    left: 50%; /* Move to the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust positioning to make it fully centered */
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+
+}
 
 input::placeholder {
     color: #E27663;
