@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 /* Body styling */
 body {
     font-family: Arial, sans-serif;
