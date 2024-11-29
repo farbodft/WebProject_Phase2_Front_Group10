@@ -16,7 +16,7 @@ body {
     background-color: #132C47;
 }
 
-/* Question Creating Box */
+/* AddQuestion Creating Box */
 .Question {
     border: 5px white solid;
     border-radius: 40px;
@@ -193,12 +193,12 @@ input::placeholder {
 }
 
 @media only screen and (max-width: 1070px){
-    /*.container {*/
-    /*    flex-direction: column;*/
-    /*    margin: 10px;*/
-    /*    height: auto;*/
-    /*    width: 100%;*/
-    /*}*/
+    .container {
+        flex-direction: column;
+        margin: 10px;
+        height: auto;
+        width: 100%;
+    }
     .Question {
         width: 80%;
     }

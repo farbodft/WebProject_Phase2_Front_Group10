@@ -1,9 +1,9 @@
 import React from 'react';
-import './Question.css';
+import './AddQuestion.css';
 
-const Question = () => {
+const AddQuestion = () => {
     return (
-        <div className="Question" id="#createQuestion">
+        <div className="Question">
             <div className="ribbon">طرح سوال جدید</div>
             <div className="label">یک سوال جدید طرح کن!</div>
             <input
@@ -51,4 +51,4 @@ const Question = () => {
     );
 };
 
-export default Question;
+export default AddQuestion;

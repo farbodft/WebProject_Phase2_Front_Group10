@@ -40,7 +40,7 @@ const List = ({ usage }) => {
 
     // Render items dynamically
     return (
-        <div className="Question" id="addedQuestion" style={{ overflowY: "auto" }}>
+        <div className="Question" style={{ overflowY: "auto" }}>
             <div className="ribbon">
                 {usage === "Questions" ? "سوال‌های موجود" : "دسته‌بندی‌های موجود"}
             </div>
