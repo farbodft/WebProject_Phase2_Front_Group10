@@ -7,7 +7,7 @@ import './MainPlayerPage.css';
 const MainPlayerPage = () => {
     return (
         <div>
-            <Navbar/>
+            <Navbar usage={"Player"}/>
             <ProfileCard/>
             <Footer/>
         </div>
