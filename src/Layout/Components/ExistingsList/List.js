@@ -19,7 +19,7 @@ const List = ({ usage }) => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setItems(usage === "Questions" ? data.questions : data.groups); // Ensure proper mapping
+                setItems(usage === "Questions" ? data.questions.map(q => q.question) : data.groups); // Ensure proper mapping
             } catch (err) {
                 setError(`Error fetching data: ${err.message}`);
             }
