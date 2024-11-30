@@ -1,0 +1,205 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+}
+
+/* AddQuestion Creating Box */
+.Question {
+    border: 5px white solid;
+    border-radius: 40px;
+    padding: 10px;
+    margin-top: 100px;
+    margin-right: 80px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 520px;
+    width: 35%;
+    position: relative;
+    background-color: #E27663;
+}
+
+
+.Question select {
+    font-family: Lalezar;
+    width: 100px; /* Adjust width as needed */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #132C47; /* Main dropdown background color */
+    color: white; /* Text color for the dropdown */
+    font-size: 1em;
+    appearance: none; /* Removes the default dropdown arrow in some browsers */
+    cursor: pointer;
+    text-align: center;
+    margin: 50% 3px 10%;
+}
+
+option {
+    background-color: #FBAE54;
+    color: #132C47;
+    padding: 10px;
+}
+
+.ribbon {
+    position: absolute; /* check the sticky one */
+    top: 10px; /* Adjust this to control the vertical position of the ribbon */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 60px;
+    background-color: #FBAE54; /* Main ribbon color */
+    color: white;
+    text-align: center;
+    line-height: 60px; /* Center text vertically */
+    font-family: Lalezar;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    z-index: 1;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Ribbon 3D shadow */
+    margin-bottom: 30px;
+}
+
+/* Ribbon triangle tails */
+.ribbon:before,
+.ribbon:after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    border-width: 15px 10px;
+    border-style: solid;
+    border-color: #FBAE54 transparent transparent transparent; /* Ribbon triangle color */
+    z-index: -1;
+}
+
+.ribbon:before {
+    left: -20px; /* Triangle on the left */
+}
+
+.ribbon:after {
+    right: -20px; /* Triangle on the right */
+}
+
+.container_buttons {
+    font-family: Lalezar;
+    width: 55%;
+    height: 20%;
+    padding: 5px 15px;
+    font-size: 1.2em;
+    background-color: #FBAE54;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px #d28f45; /* Shadow for 3D effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 5%;
+    position: absolute;  /* Position it inside the parent */
+    top: 60%;  /* Move to the vertical center */
+    left: 50%; /* Move to the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust positioning to make it fully centered */
+}
+
+/* On hover: animate the button with a "press-down" effect */
+.container_buttons:hover {
+    transform: translate(-50%, -55%); /* Slightly hover upwards */
+    box-shadow: 0 12px #b5773a; /* Deeper shadow */
+}
+
+/* On active: simulate a button press */
+.container_buttons:active {
+    transform: translate(-50%, -45%); /* Move it downward when clicked */
+    box-shadow: 0 4px #d28f45; /* Shallower shadow to show press */
+}
+
+/* Style for the label */
+.label {
+    font-family: Lalezar;
+    font-size: 1.5em; /* Increase the font size */
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 20px; /* Add space between label and dropdown */
+    text-align: center;
+    color: #1A3B5E;
+    text-shadow: #FBAE54 1px 1px 1px;
+    unicode-bidi: embed;
+    direction: rtl;
+}
+
+.question_marks {
+    font-family: Lalezar;
+    font-size: 1.2em;
+    color: #FBAE54;
+    background-color: #132C47;
+    height: 90px;
+    width: 50%;
+    align-content: center;
+    margin: auto;  /* Automatically center horizontally and vertically */
+    position: absolute;  /* Position it inside the parent */
+    top: 40%;  /* Move to the vertical center */
+    left: 50%; /* Move to the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust positioning to make it fully centered */
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+
+}
+
+input::placeholder {
+    color: #E27663;
+    opacity: 100%;
+}
+
+.choice {
+    font-family: Lalezar;
+    font-size: 0.8em;
+    color: #FBAE54;
+    background-color: #132C47;
+    height: 30px;
+    width: 22%;
+    align-content: center;
+    /* Automatically center horizontally and vertically */
+    margin: -20px auto;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.choices {
+    position: absolute; /* Make it position relative to the parent */
+    top: 60%; /* Move to the vertical center */
+    left: 50%; /* Move to the horizontal center */
+    transform: translate(-50%, -50%); /* Fully center the element */
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@media only screen and (max-width: 1070px){
+    .container {
+        flex-direction: column;
+        margin: 10px;
+        height: auto;
+        width: 100%;
+    }
+    .Question {
+        width: 80%;
+    }
+}
