@@ -1,7 +1,27 @@
-import React from 'react';
-import './AddQuestion.css';
+import React, { useEffect, useState } from "react";
+import "./AddQuestion.css";
 
 const AddQuestion = () => {
+    const [groups, setGroups] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchGroups = async () => {
+            try {
+                const response = await fetch("/ExistingGroups.json");
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setGroups(data.groups);
+            } catch (err) {
+                setError(`Error fetching groups: ${err.message}`);
+            }
+        };
+
+        fetchGroups();
+    }, []);
+
     return (
         <div className="Question">
             <div className="ribbon">طرح سوال جدید</div>
@@ -22,9 +42,17 @@ const AddQuestion = () => {
                     <option value="" disabled>
                         دسته بندی
                     </option>
-                    <option>هوش</option>
-                    <option>ریاضی</option>
-                    <option>سینما</option>
+                    {error ? (
+                        <option disabled>Failed to load categories</option>
+                    ) : groups.length > 0 ? (
+                        groups.map((group, index) => (
+                            <option key={index} value={group}>
+                                {group}
+                            </option>
+                        ))
+                    ) : (
+                        <option disabled>Loading...</option>
+                    )}
                 </select>
                 <select title="درجه سختی" defaultValue="">
                     <option value="" disabled>
@@ -44,7 +72,7 @@ const AddQuestion = () => {
                     <option value="4">گزینه 4</option>
                 </select>
             </div>
-            <button className="container_buttons" style={{ top: '80%' }}>
+            <button className="container_buttons" style={{ top: "80%" }}>
                 طرح سوال
             </button>
         </div>
