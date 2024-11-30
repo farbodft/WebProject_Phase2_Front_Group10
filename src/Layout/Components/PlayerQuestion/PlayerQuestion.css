@@ -291,6 +291,15 @@ li.false {
 }
 
 
+.error-popup {
+    font-family: Lalezar;
+    color: red;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 47%;
+    direction: rtl;
+}
 
 
 /* Mobile screens (max-width: 768px) */
