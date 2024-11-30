@@ -7,9 +7,7 @@ const TarrahMain = () => {
     return (
         <div>
             <Navbar usage={"Tarrah"}/>
-            <div className={'container'}>
-                <ProfileCard />
-            </div>
+            <ProfileCard usage={"Tarrah"}/>
             <Footer/>
         </div>
     );

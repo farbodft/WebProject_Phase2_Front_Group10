@@ -8,7 +8,7 @@ const MainPlayerPage = () => {
     return (
         <div>
             <Navbar usage={"Player"}/>
-            <ProfileCard/>
+            <ProfileCard usage={"Player"}/>
             <Footer/>
         </div>
     );
