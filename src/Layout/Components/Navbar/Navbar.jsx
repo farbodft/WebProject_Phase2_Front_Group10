@@ -9,8 +9,8 @@ const Navbar = ({usage}) => {
                 <button onClick={() => window.location.href='/'} className="navbar-btn">خروج</button>
                 <div className="right-section">
                     <div className="nav-links">
-                        <Link to="/PlayerQuestion">مدیریت سوالات</Link>
-                        <Link to="/RankingTable">جدول امتیازات</Link>
+                        <Link to="/QuestionBox">مدیریت سوالات</Link>
+                        <Link to="/ScoreTable">جدول امتیازات</Link>
                         <Link to="/">صفحه اصلی</Link>
                     </div>
                     <div className="logo">
