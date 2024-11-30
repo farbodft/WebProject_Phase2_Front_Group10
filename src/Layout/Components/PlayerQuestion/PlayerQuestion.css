@@ -1,0 +1,366 @@
+@font-face {
+    font-family: Lalezar;
+    src: url("/src/Font/Lalezar-Regular.ttf");
+    font-weight: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+    height: 100vh;
+}
+.answeredBox {
+    border: 5px white solid;
+    border-radius: 40px;
+    padding: 10px;
+    margin-right: 80px;
+    margin-left: auto;
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    height: 520px;
+    width: 30%;
+    position: relative;
+    background-color: #A0DBE0;
+}
+
+/* Ribbon styling */
+.ribbon {
+    position: absolute;
+    top: 10px; /* handle vertical position of the ribbon */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 60px;
+    background-color: #FBAE54; /* ribbon's color */
+    color: white;
+    text-align: center;
+    line-height: 60px; /* Center text vertically */
+    font-family: Lalezar;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text */
+    z-index: 1;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Ribbon's shadow */
+}
+
+.ribbon:before,
+.ribbon:after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    border-width: 15px 10px;
+    border-style: solid;
+    border-color: #FBAE54 transparent transparent transparent;
+    z-index: -1;
+}
+
+.ribbon:before {
+    left: -20px; /* Triangle on the left */
+}
+
+.ribbon:after {
+    right: -20px; /* Triangle on the right */
+}
+
+/* Random question button with 3D effect */
+.randomQuestion {
+    font-family: Lalezar;
+    width: 250px;
+    height: 80px;
+    padding: 5px 15px;
+    font-size: 1.2em;
+    background-color: #FBAE54;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px #d28f45; /* Shadow for 3D effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: auto;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Adjust positioning to make it fully centered */
+}
+
+/* On hover: animate the button with a "press-down" effect */
+.randomQuestion:hover {
+    transform: translate(-50%, -55%); /* Slightly hover upwards */
+    box-shadow: 0 12px #b5773a; /* Deeper shadow */
+}
+
+/* On active: simulate a button press */
+.randomQuestion:active {
+    transform: translate(-50%, -45%); /* Move it downward when clicked */
+    box-shadow: 0 4px #d28f45;
+}
+
+.ChooseQuestion {
+    border: 4px double white;
+    border-radius: 40px;
+    padding: 10px;
+    margin-right: 90px;
+    margin-left: auto;
+    margin-top: 220px;
+    display: flex;
+    flex-direction: column; /* Make the container items stack vertically */
+    align-items: center; /* Center-align the items horizontally */
+    height: 270px;
+    width: 60%;
+    position: relative;
+    background-color: #A0DBE0;
+}
+
+/* Style for the dropdown (select) */
+select {
+    font-family: Lalezar;
+    width: 180px; /* Adjust width as needed */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #132C47; /* Main dropdown background color */
+    color: white; /* Text color for the dropdown */
+    font-size: 1em;
+    appearance: none; /* Removes the default dropdown arrow in some browsers */
+    cursor: pointer;
+    text-align: center;
+    margin-top: 0px; /* Add space between label and dropdown */
+}
+
+/* Style for the options */
+option {
+    background-color: #FBAE54; /* Different background color for options */
+    color: #132C47; /* Text color for the options */
+    padding: 10px;
+}
+
+/* Optional: Add hover effect for the dropdown */
+select:hover {
+    background-color: #1A3B5E; /* Slightly different hover effect */
+}
+
+/* Style for the label */
+.label {
+    font-family: Lalezar;
+    font-size: 1em; /* Increase the font size */
+    font-weight: bold;
+    margin-bottom: 20px; /* Add space between label and dropdown */
+    text-align: center;
+    margin-top: 10px;
+    color: #1A3B5E;
+    text-shadow: #FBAE54 1px 1px 1px;
+    unicode-bidi: embed;
+    direction: rtl;
+}
+
+.selectedQuestion {
+
+    font-family: Lalezar;
+    width: 200px;
+    height: 80px;
+    padding: 5px 15px;
+    font-size: 1.2em;
+    background-color: #FBAE54;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px #d28f45; /* Shadow for 3D effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: auto;  /* Automatically center horizontally and vertically */
+    position: absolute;  /* Position it inside the parent */
+    top: 70%;  /* Move to the vertical center */
+    left: 50%; /* Move to the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust positioning to make it fully centered */
+}
+
+/* On hover: animate the button with a "press-down" effect */
+.selectedQuestion:hover {
+    transform: translate(-50%, -55%); /* Slightly hover upwards */
+    box-shadow: 0 12px #b5773a; /* Deeper shadow */
+}
+
+/* On active: simulate a button press */
+.selectedQuestion:active {
+    transform: translate(-50%, -45%); /* Move it downward when clicked */
+    box-shadow: 0 4px #d28f45; /* Shallower shadow to show press */
+}
+
+.questionList {
+    border: 5px white solid;
+    border-radius: 40px;
+    margin-right: auto;  /* Move it to the left */
+    margin-left: 50px;   /* Adjust distance from the left side */
+    margin-top: 100px;    /* Bring it closer to the top */
+    height: 520px;
+    width: 30%;
+    display: flex;
+    flex-direction: column; /* Make it stack vertically */
+    background-color: #A0DBE0;
+    position: absolute;  /* Position it freely within the parent */
+    top: 10%;            /* Move it higher on the page */
+    left: 5%;            /* Adjust it towards the left */
+}
+
+.text-in-questionList {
+    color: white;
+    font-family: Lalezar;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    margin-left: 0%;
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    height: 45px;
+    text-shadow: #FBAE54 1px 1px 1px;
+}
+
+/* Scrollable box */
+.scroll-box {
+    background-color: #fff; /* Background color for the scroll box */
+    padding: 15px;
+    margin: 20px auto;
+    width: 90%;
+    height: 350px; /* Fixed height to allow scrolling */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    border-radius: 15px;
+    border: 2px solid #fba54b; /* Light border around the box */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow effect */
+}
+
+/* Styling the scrollbar */
+.scroll-box::-webkit-scrollbar {
+    width: 20px; /* Scrollbar width */
+}
+
+.scroll-box::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #FBAE54; /* Track shadow */
+    border-radius: 10px; /* Track rounded corners */
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+    background: #FBAE54; /* Scrollbar handle color */
+    border-radius: 10px; /* Rounded handle */
+}
+
+.scroll-box::-webkit-scrollbar-thumb:hover {
+    background: #d28f45; /* Darker  on hover */
+}
+
+/* List styling */
+.question-items {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    direction: rtl; /* Ensure text is aligned right (RTL) */
+}
+
+.question-items li {
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.question-items li:hover {
+    background-color: #f0f0f0; /* Slight color change on hover */
+}
+
+li.true {
+    font-family: Lalezar;
+    color: green;
+}
+
+li.false {
+    font-family: Lalezar;
+    color: red;
+}
+
+
+
+
+/* Mobile screens (max-width: 768px) */
+@media (max-width: 768px) {
+    .answeredBox, .questionList {
+        width: 90%; /* Take up most of the screen width */
+        margin: 20px auto; /* Center the boxes */
+        height: auto; /* Auto height to allow content to fit */
+    }
+    .ChooseQuestion {
+        margin-right: 120px;
+    }
+    .questionList {
+        position: relative; /* Remove absolute positioning */
+        top: auto;
+        left: auto;
+        right: auto;
+        margin-top: 20px; /* Add space from the top */
+    }
+
+    /* Scroll box height adjustment for smaller screens */
+    .scroll-box {
+        height: 200px;
+    }
+
+    /* Adjust buttons for mobile */
+    .randomQuestion, .selectedQuestion {
+        width: 180px;
+        height: 50px;
+        font-size: 0.9em;
+    }
+
+    select {
+        width: 160px;
+        font-size: 0.9em;
+    }
+
+    .label, .text-in-questionList {
+        font-size: 1em;
+    }
+}
+
+/* Very small mobile screens (max-width: 480px) */
+@media (max-width: 600px) {
+    .answeredBox, .questionList {
+        width: 100%; /* Full width on small mobile devices */
+        margin: 10px auto;
+        height: auto; /* Auto height to fit content */
+    }
+    .ChooseQuestion {
+        margin-left: 120px;
+        width: 100%;
+    }
+    .scroll-box {
+        height: 150px; /* Further reduce scroll-box height */
+    }
+
+    /* Adjust buttons for small screens */
+    .randomQuestion, .selectedQuestion {
+        width: 150px;
+        height: 45px;
+        font-size: 0.8em;
+    }
+
+    select {
+        width: 140px;
+        font-size: 0.8em;
+    }
+
+    .label, .text-in-questionList {
+        font-size: 0.9em;
+    }
+}
