@@ -1,0 +1,55 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+}
+
+.logo-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 150px;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    margin-top: 20px;
+    font-family: Lalezar;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.button {
+    font-family: Lalezar;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: #fba54b;
+}
+
+.button.secondary {
+    background-color: #1A3B5E;
+}
+
+.button:hover {
+    background-color: #fba54b;
+    color: white;
+}
