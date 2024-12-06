@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './Choice.css';
 
 const Choice = () => {
+    const navigate = useNavigate(); 
+
     return (
         <div>
             <div className="logo-container">
@@ -9,8 +12,8 @@ const Choice = () => {
             </div>
             <div className="header">!نقش خودت رو انتخاب کن</div>
             <div className="button-container">
-                <button onClick={() => window.location.href = 'LoginPage.html'} className="button">طراح</button>
-                <button onClick={() => window.location.href = 'LoginPage.html'} className="button secondary">بازیکن</button>
+                <button onClick={() => navigate('/login')} className="button">طراح</button>
+                <button onClick={() => navigate('/login')} className="button secondary">بازیکن</button>
             </div>
         </div>
     );

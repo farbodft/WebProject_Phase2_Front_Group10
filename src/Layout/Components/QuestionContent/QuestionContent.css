@@ -1,0 +1,140 @@
+@font-face {
+    font-family: Lalezar;
+    src: url("/src/Font/Lalezar-Regular.ttf");
+    font-weight: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #132C47;
+    height: 100vh;
+}
+
+.quiz-container {
+    background-color: #A0DBE0;
+    padding: 5%;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    font-family: Lalezar;
+    font-size: large;
+}
+
+.score {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.score p {
+    color: #203340;
+    font-size: 18px;
+}
+
+.question-box {
+    background-color: #FBAE54;
+    padding: 7%;
+    width: 100%;
+    max-width: 1050px;
+    text-align: center;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-size: 2.5rem;
+    font-family: Lalezar;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    font-family: Lalezar;
+}
+
+.option {
+    flex: 1 1 45%;
+    padding: 3%;
+    border-radius: 30px;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    font-family: Lalezar;
+    background-color: #132C47;
+}
+
+.option.correct {
+    background-color: #132C47;
+}
+
+.option.correct:focus {
+    background-color: #4CAF50;
+}
+
+.option.wrong {
+    background-color: #132C47;
+}
+
+.option.wrong:focus {
+    background-color: #bb2012;
+}
+
+.option:hover {
+    opacity: 0.9;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .quiz-container {
+        padding: 3%;
+        margin-top: 100px;
+    }
+    
+    .question-box {
+        font-size: 2rem;
+        padding: 5%;
+    }
+
+    .options {
+        gap: 5px;
+    }
+
+    .option {
+        flex: 1 1 100%;
+        font-size: 1rem;
+        padding: 2%;
+    }
+    footer {
+        margin-top: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-container {
+       margin-top: 100px;
+    }
+    .question-box {
+        font-size: 1.5rem;
+        padding: 4%;
+    }
+
+    .option {
+        font-size: 0.9rem;
+        padding: 2%;
+    }
+
+}

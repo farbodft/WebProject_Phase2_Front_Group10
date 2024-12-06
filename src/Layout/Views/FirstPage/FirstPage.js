@@ -1,8 +1,6 @@
 import React from 'react';
 import Choice from '../../Components/Choice/Choice';
 import Footer from '../../Components/Footer/Footer';
-import '../../Views/FirstPage/FirstPageStyle.css';
-
 
 const FirstPage = () => {
     return (
@@ -11,6 +9,6 @@ const FirstPage = () => {
             <Footer />
         </div>
     );
-}
+};
 
 export default FirstPage;
