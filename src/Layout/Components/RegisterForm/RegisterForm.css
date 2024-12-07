@@ -42,5 +42,5 @@ button {
 }
 
 button:hover {
-    background-color: #0b3a57;
+    opacity: 0.9;
 }
