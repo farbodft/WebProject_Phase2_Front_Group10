@@ -10,7 +10,7 @@ const ProfileCard = ({ username = "mobina"}) => {
         // Fetch player data from the server
         const fetchPlayer = async () => {
             try {
-                const response = await fetch(`http://localhost:5005/api/player/${username}`);
+                const response = await fetch(`http://localhost:5008/api/player/${username}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch player data.");
                 }
