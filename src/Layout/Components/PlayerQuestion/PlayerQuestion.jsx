@@ -8,30 +8,48 @@ function PlayerQuestion() {
     const [selectedCategory, setSelectedCategory] = useState(""); // ذخیره دسته‌بندی انتخاب‌شده
     const [showError, setShowError] = useState(false); // برای نمایش پاپ آپ قرمز رنگ
 
+    // بارگذاری داده‌ها از API
     useEffect(() => {
-        // خواندن فایل JSON دسته‌بندی‌ها از مسیر public
-        fetch("/ExistingGroups.json")
+        // دریافت دسته‌بندی‌ها
+        fetch("http://localhost:5005/api/categories")
             .then((response) => response.json())
             .then((data) => {
-                setCategories(data.groups); // ذخیره دسته‌بندی‌ها در state
+                console.log("Categories Data:", data); // دیباگ: داده‌های دسته‌بندی‌ها را بررسی کن
+                if (data && data.groups && Array.isArray(data.groups)) { // بررسی وجود ویژگی groups و نوع آرایه بودن آن
+                    setCategories(data.groups); // ذخیره دسته‌بندی‌ها در state
+                } else {
+                    console.error("داده‌های دسته‌بندی‌ها صحیح نیستند:", data);
+                }
             })
-            .catch((error) => console.error("Error fetching categories JSON:", error));
+            .catch((error) => console.error("Error fetching categories:", error));
 
-        // خواندن فایل JSON سوال‌ها از مسیر public
-        fetch("/ExistingQuestions.json")
+        // دریافت سوالات
+        fetch("http://localhost:5005/api/questions")
             .then((response) => response.json())
             .then((data) => {
-                setQuestions(data.questions); // ذخیره سوالات مربوط به دسته‌بندی‌ها
+                console.log("Questions Data:", data); // دیباگ: داده‌های سوالات را بررسی کن
+                if (data && Array.isArray(data.questions)) { // چک می‌کنیم که آیا سوالات در data.questions وجود دارد
+                    setQuestions(data.questions); // ذخیره سوالات مربوط به دسته‌بندی‌ها
+                } else {
+                    console.error("داده‌های سوالات صحیح نیستند:", data);
+                }
             })
-            .catch((error) => console.error("Error fetching questions JSON:", error));
+            .catch((error) => console.error("Error fetching questions:", error));
 
-        // خواندن فایل JSON سوالات پاسخ داده‌شده از مسیر public
-        fetch("/AnsweredQuestions.json")
+        // دریافت سوالات پاسخ داده‌شده
+        fetch("http://localhost:5005/api/answered-questions")
             .then((response) => response.json())
             .then((data) => {
-                setAnsweredQuestions(data.answeredQuestions); // ذخیره سوالات پاسخ داده‌شده در state
+                console.log("Answered Questions Data:", data); // دیباگ: داده‌های سوالات پاسخ داده‌شده را بررسی کن
+                if (Array.isArray(data)) {
+                    setAnsweredQuestions(data); // ذخیره سوالات پاسخ داده‌شده
+                } else if (data.answeredQuestions && Array.isArray(data.answeredQuestions)) {
+                    setAnsweredQuestions(data.answeredQuestions); // در صورت استفاده از ویژگی answeredQuestions
+                } else {
+                    console.error("داده‌های سوالات پاسخ داده‌شده صحیح نیستند:", data);
+                }
             })
-            .catch((error) => console.error("Error fetching answered questions JSON:", error));
+            .catch((error) => console.error("Error fetching answered questions:", error));
     }, []);
 
     // هندلر برای شروع بازی براساس دسته‌بندی انتخاب‌شده
@@ -98,11 +116,15 @@ function PlayerQuestion() {
                         <option value="" disabled selected>
                             دسته‌بندی‌ها
                         </option>
-                        {categories.map((category, index) => (
-                            <option key={index} value={category}>
-                                {category}
-                            </option>
-                        ))}
+                        {categories.length > 0 ? (
+                            categories.map((category, index) => (
+                                <option key={index} value={category}>
+                                    {category}
+                                </option>
+                            ))
+                        ) : (
+                            <option disabled>دسته‌بندی‌ها بارگذاری نمی‌شوند.</option>
+                        )}
                     </select>
                     <button onClick={handleStartGame} className="selectedQuestion">
                         شروع بازی
@@ -122,14 +144,18 @@ function PlayerQuestion() {
                 <div className="text-in-questionList">سوال‌های پاسخ داده‌شده</div>
                 <div className="scroll-box">
                     <ul className="question-items">
-                        {answeredQuestions.map((question) => (
-                            <li
-                                key={question.id}
-                                className={question.answered ? "true" : "false"}
-                            >
-                                {question.text}
-                            </li>
-                        ))}
+                        {answeredQuestions.length > 0 ? (
+                            answeredQuestions.map((question) => (
+                                <li
+                                    key={question.id}
+                                    className={question.answered ? "true" : "false"}
+                                >
+                                    {question.text}
+                                </li>
+                            ))
+                        ) : (
+                            <li>هیچ سوالی پاسخ داده نشده است.</li>
+                        )}
                     </ul>
                 </div>
             </div>
@@ -138,4 +164,3 @@ function PlayerQuestion() {
 }
 
 export default PlayerQuestion;
-
