@@ -5,7 +5,7 @@ import RankingTable from "../../Components/RankingTable/RankingTable";
 const ScoreTable = () => {
     return (
         <div>
-            <Navbar/>
+            <Navbar usage={"Player"}/>
             <RankingTable/>
             <Footer/>
         </div>

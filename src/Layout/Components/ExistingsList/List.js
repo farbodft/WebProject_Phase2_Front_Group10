@@ -8,7 +8,7 @@ const List = ({ usage }) => {
     // Determine JSON path based on usage prop
     const jsonPath = usage === "Questions"
         ? "/ExistingQuestions.json"
-        : "/ExistingGroups.json";
+        : "/ExistingCategories.json";
 
     // Fetch data from the JSON file
     useEffect(() => {
@@ -19,7 +19,7 @@ const List = ({ usage }) => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setItems(usage === "Questions" ? data.questions : data.groups); // Ensure proper mapping
+                setItems(usage === "Questions" ? data.questions.map(q => q.question) : data.groups); // Ensure proper mapping
             } catch (err) {
                 setError(`Error fetching data: ${err.message}`);
             }
@@ -44,7 +44,7 @@ const List = ({ usage }) => {
             <div className="ribbon">
                 {usage === "Questions" ? "سوال‌های موجود" : "دسته‌بندی‌های موجود"}
             </div>
-            <div className="addedGroups">
+            <div className="addedCategories">
                 {items.map((item, index) => (
                     <h1 key={index}>
                         <b>{item}</b>

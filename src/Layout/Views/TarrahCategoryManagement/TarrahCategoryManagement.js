@@ -1,20 +1,20 @@
 import React from 'react';
 import List from "../../Components/ExistingsList/List";
-import AddQuestion from "../../Components/QuestionAdding/AddQuestion";
-import Navbar from "../../Components/Navbar/Navbar";
+import AddCategory from "../../Components/CategoryAdding/AddCategory";
 import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
 
-const TarrahQuestionManagement = () => {
+const TarrahCategoryManagement = () => {
     return (
         <div>
             <Navbar usage={"Tarrah"}/>
             <div className={'container'}>
-                <AddQuestion />
-                <List usage="Questions" />
+                <AddCategory />
+                <List usage="Groups" />
             </div>
             <Footer/>
         </div>
     );
 }
 
-export default TarrahQuestionManagement;
+export default TarrahCategoryManagement;

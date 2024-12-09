@@ -1,7 +1,7 @@
 import React from 'react';
-import './AddGroup.css';
+import './AddCategory.css';
 
-const AddGroup = () => {
+const AddCategory = () => {
     return (
         <div className="Question">
             <div className="ribbon">افزودن دسته بندی</div>
@@ -12,4 +12,4 @@ const AddGroup = () => {
     );
 };
 
-export default AddGroup;
+export default AddCategory;
