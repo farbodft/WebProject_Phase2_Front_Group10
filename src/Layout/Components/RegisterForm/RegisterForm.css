@@ -1,0 +1,53 @@
+.form-box {
+    background-color: #FBAE54;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 30px;
+    padding: 1.5%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #132C47;
+    font-family: Lalezar;
+    font-size: 100%;
+    direction: rtl;
+}
+
+input[type="text"],
+input[type="password"],
+
+select.genderSelect {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    background-color: #fff;
+    color: #132C47;
+    border-radius: 5px;
+}
+
+
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #132C47;
+    color: #fff;
+    font-family: Lalezar;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 130%;
+}
+
+button:hover {
+    opacity: 0.9;
+}
