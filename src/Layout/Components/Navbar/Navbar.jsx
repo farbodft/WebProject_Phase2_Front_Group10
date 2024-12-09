@@ -11,7 +11,7 @@ const Navbar = ({usage}) => {
                     <div className="nav-links">
                         <Link to="/QuestionBox">مدیریت سوالات</Link>
                         <Link to="/ScoreTable">جدول امتیازات</Link>
-                        <Link to="/">صفحه اصلی</Link>
+                        <Link to="/PlayerMainPage">صفحه اصلی</Link>
                     </div>
                     <div className="logo">
                         <img src="/photo/logo.png" alt="Logo" />
@@ -27,8 +27,8 @@ const Navbar = ({usage}) => {
                 <div className="right-section">
                     <div className="nav-links">
                         <Link to="/TarrahQuestionManagement">مدیریت سوالات</Link>
-                        <Link to="/TarrahGroupManagement">مدیریت دسته بندی ها</Link>
-                        <Link to="/">صفحه اصلی</Link>
+                        <Link to="/TarrahCategoryManagement">مدیریت دسته بندی ها</Link>
+                        <Link to="/TarrahMainPage">صفحه اصلی</Link>
                     </div>
                     <div className="logo">
                         <img src="/photo/logo.png" alt="Logo" />

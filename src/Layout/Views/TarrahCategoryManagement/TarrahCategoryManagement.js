@@ -1,15 +1,15 @@
 import React from 'react';
 import List from "../../Components/ExistingsList/List";
-import AddGroup from "../../Components/GroupAdding/AddGroup";
+import AddCategory from "../../Components/CategoryAdding/AddCategory";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
 
-const TarrahGroupManagement = () => {
+const TarrahCategoryManagement = () => {
     return (
         <div>
             <Navbar usage={"Tarrah"}/>
             <div className={'container'}>
-                <AddGroup />
+                <AddCategory />
                 <List usage="Groups" />
             </div>
             <Footer/>
@@ -17,4 +17,4 @@ const TarrahGroupManagement = () => {
     );
 }
 
-export default TarrahGroupManagement;
+export default TarrahCategoryManagement;
