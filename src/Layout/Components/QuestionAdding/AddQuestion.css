@@ -143,7 +143,7 @@ option {
     direction: rtl;
 }
 
-.question_marks {
+input.question_marks {
     font-family: Lalezar;
     font-size: 1.2em;
     color: #FBAE54;
@@ -167,7 +167,7 @@ input::placeholder {
     opacity: 100%;
 }
 
-.choice {
+input.choice {
     font-family: Lalezar;
     font-size: 0.8em;
     color: #FBAE54;
