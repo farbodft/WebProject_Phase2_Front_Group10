@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./PlayerQuestion.css";
 
-function PlayerQuestion({ username = "mobina"}) {
+function PlayerQuestion({ username = "mobina" }) {
     const [categories, setCategories] = useState([]); // ذخیره دسته‌بندی‌ها
     const [questions, setQuestions] = useState([]); // ذخیره سوالات دسته‌بندی‌ها
     const [answeredQuestions, setAnsweredQuestions] = useState([]); // ذخیره سوالات پاسخ داده‌شده
@@ -10,32 +10,34 @@ function PlayerQuestion({ username = "mobina"}) {
 
     // بارگذاری داده‌ها از API
     useEffect(() => {
-        // دریافت دسته‌بندی‌ها
-        fetch("http://localhost:5008/api/categories")
+        fetch("http://localhost:5009/api/categories")
             .then((response) => response.json())
             .then((data) => {
-                if (data && data.groups && Array.isArray(data.groups)) {
-                    setCategories(data.groups);
+                // بررسی مستقیم اگر داده‌ها آرایه باشند
+                if (Array.isArray(data)) {
+                    setCategories(data);
                 } else {
                     console.error("داده‌های دسته‌بندی‌ها صحیح نیستند:", data);
                 }
             })
-            .catch((error) => console.error("Error fetching categories:", error));
+            .catch((error) => console.error("خطا در دریافت دسته‌بندی‌ها:", error));
 
         // دریافت سوالات
-        fetch("http://localhost:5008/api/questions")
+        fetch("http://localhost:5009/api/questions")
             .then((response) => response.json())
             .then((data) => {
-                if (data && Array.isArray(data.questions)) {
+                // بررسی اگر داده‌ها آرایه باشند
+                if (data && Array.isArray(data)) {
+                    setQuestions(data);
+                } else if (data.questions && Array.isArray(data.questions)) {
                     setQuestions(data.questions);
                 } else {
                     console.error("داده‌های سوالات صحیح نیستند:", data);
                 }
             })
-            .catch((error) => console.error("Error fetching questions:", error));
-
+            .catch((error) => console.error("خطا در دریافت سوالات:", error));
         // دریافت سوالات پاسخ داده‌شده بر اساس username
-        fetch(`http://localhost:5008/api/answered-questions/${username}`)
+        fetch(`http://localhost:5009/api/answered-questions/${username}`)
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {
@@ -46,7 +48,7 @@ function PlayerQuestion({ username = "mobina"}) {
                     console.error("داده‌های سوالات پاسخ داده‌شده صحیح نیستند:", data);
                 }
             })
-            .catch((error) => console.error("Error fetching answered questions:", error));
+            .catch((error) => console.error("خطا در دریافت سوالات پاسخ داده‌شده:", error));
     }, [username]);
 
     // هندلر برای شروع بازی براساس دسته‌بندی انتخاب‌شده
@@ -82,14 +84,6 @@ function PlayerQuestion({ username = "mobina"}) {
         const selected = e.target.value;
         setSelectedCategory(selected);
         setShowError(false);
-
-        const filteredQuestions = questions.filter(
-            (question) => question.category === selected
-        );
-
-        if (filteredQuestions.length > 0) {
-            console.log("سوال مربوط به دسته‌بندی انتخاب‌شده:", filteredQuestions[0]);
-        }
     };
 
     return (
@@ -102,8 +96,8 @@ function PlayerQuestion({ username = "mobina"}) {
                 </button>
                 <div className="ChooseQuestion">
                     <div className="label">دسته‌بندی مورد نظر انتخاب کن و خودت به چالش بکش!</div>
-                    <select id="category" onChange={handleCategoryChange}>
-                        <option value="" disabled selected>
+                    <select id="category" onChange={handleCategoryChange} value={selectedCategory}>
+                        <option value="" disabled>
                             دسته‌بندی‌ها
                         </option>
                         {categories.length > 0 ? (
