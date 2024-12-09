@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     border-radius: 30px;
-    padding: 2%;
+    padding: 1.5%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;
@@ -21,13 +21,20 @@ label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+
+select.genderSelect {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: none;
+    background-color: #fff;
+    color: #132C47;
     border-radius: 5px;
 }
+
+
+
 
 button {
     width: 100%;

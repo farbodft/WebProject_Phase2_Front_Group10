@@ -13,6 +13,12 @@ const RegisterForm = () => {
                 <input type="password" id="password-register" name="password-register" />
                 <label htmlFor="confirm-password">تکرار گذرواژه:</label>
                 <input type="password" id="confirm-password" name="confirm-password" />
+                <label htmlFor="gender">جنسیت:</label>
+                <select className="genderSelect" title="جنسیت">
+                <option value="" disabled selected>انتخاب کنید</option>
+                <option>مرد</option>
+                <option>زن</option>
+            </select>
                 <button type="submit">ثبت نام</button>
             </form>
         </div>

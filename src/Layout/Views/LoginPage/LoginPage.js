@@ -6,7 +6,7 @@ import Footer from '../../Components/Footer/Footer';
 const LoginPage = () => {
     return (
         <div>
-            <img src="/photo/logo.png" alt="Logo" className="logo" />
+            {/* <img src="/photo/logo.png" alt="Logo" className="logo" /> */}
             <div className="container">
                 <LoginForm />
                 <RegisterForm />
