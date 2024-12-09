@@ -90,7 +90,7 @@ function PlayerQuestion() {
                     سوال تصادفی
                 </button>
                 <div className="ChooseQuestion">
-                    <div className="label">دسته‌بندی مورد نظر انتخاب کن و خودت به چالش بکش!</div>
+                    <div className="Questionlabel">دسته‌بندی مورد نظر انتخاب کن و خودت به چالش بکش!</div>
                     <select
                         id="category"
                         onChange={handleCategoryChange} // استفاده از هندلر جدید

@@ -149,7 +149,7 @@ select:hover {
 }
 
 /* Style for the label */
-.label {
+.Questionlabel {
     font-family: Lalezar;
     font-size: 1em; /* Increase the font size */
     font-weight: bold;
