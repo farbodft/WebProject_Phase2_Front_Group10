@@ -1,10 +1,10 @@
 import React from 'react';
-import './RegisterForm.css'; 
+import './RegisterForm.css';
 
-const RegisterForm = () => {
+const RegisterForm = ({ onSubmit }) => {
     return (
         <div className="form-box">
-            <form action="/TarrahMain.html">
+            <form onSubmit={onSubmit}>
                 <label htmlFor="email-register">ایمیل:</label>
                 <input type="text" id="email-register" name="email-register" />
                 <label htmlFor="username-register">نام کاربری:</label>
@@ -15,10 +15,10 @@ const RegisterForm = () => {
                 <input type="password" id="confirm-password" name="confirm-password" />
                 <label htmlFor="gender">جنسیت:</label>
                 <select className="genderSelect" title="جنسیت">
-                <option value="" disabled selected>انتخاب کنید</option>
-                <option>مرد</option>
-                <option>زن</option>
-            </select>
+                    <option value="" disabled selected>انتخاب کنید</option>
+                    <option>مرد</option>
+                    <option>زن</option>
+                </select>
                 <button type="submit">ثبت نام</button>
             </form>
         </div>

@@ -1,9 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import './Choice.css';
 
 const Choice = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+
+    const handleRoleSelection = (role) => {
+        sessionStorage.setItem("role", role);  // ذخیره نقش در sessionStorage
+        navigate('/login');  // هدایت به صفحه لاگین
+    }
 
     return (
         <div>
@@ -12,8 +17,8 @@ const Choice = () => {
             </div>
             <div className="header">!نقش خودت رو انتخاب کن</div>
             <div className="button-container">
-                <button onClick={() => navigate('/login')} className="button">طراح</button>
-                <button onClick={() => navigate('/login')} className="button secondary">بازیکن</button>
+                <button onClick={() => handleRoleSelection('designer')} className="button">طراح</button>
+                <button onClick={() => handleRoleSelection('player')} className="button secondary">بازیکن</button>
             </div>
         </div>
     );

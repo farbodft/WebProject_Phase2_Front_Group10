@@ -1,10 +1,10 @@
 import React from 'react';
-import './LoginForm.css'; 
+import './LoginForm.css';
 
-const LoginForm = () => {
+const LoginForm = ({ onSubmit }) => {
     return (
         <div className="form-box">
-            <form action="/MainPlayerPage.html">
+            <form onSubmit={onSubmit}>
                 <label htmlFor="username-login">نام کاربری:</label>
                 <input type="text" id="username-login" name="username-login" />
                 <label htmlFor="password-login">گذرواژه:</label>
@@ -16,3 +16,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
