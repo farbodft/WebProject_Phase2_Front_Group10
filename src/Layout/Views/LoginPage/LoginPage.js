@@ -7,7 +7,7 @@ const LoginPage = () => {
     return (
         <div>
             {/* <img src="/photo/logo.png" alt="Logo" className="logo" /> */}
-            <div className="container">
+            <div className="container" style={ {display: "flex", flexDirection: "column"}}>
                 <LoginForm />
                 <RegisterForm />
             </div>
