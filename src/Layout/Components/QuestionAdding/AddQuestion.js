@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./AddQuestion.css";
 
 const AddQuestion = () => {
-    const [groups, setGroups] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchGroups = async () => {
+        const fetchCategories = async () => {
             try {
-                const response = await fetch("/ExistingGroups.json");
+                const response = await fetch("/ExistingCategories.json");
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setGroups(data.groups);
+                setCategories(data.category);
             } catch (err) {
                 setError(`Error fetching groups: ${err.message}`);
             }
         };
 
-        fetchGroups();
+        fetchCategories();
     }, []);
 
     return (
@@ -44,10 +44,10 @@ const AddQuestion = () => {
                     </option>
                     {error ? (
                         <option disabled>Failed to load categories</option>
-                    ) : groups.length > 0 ? (
-                        groups.map((group, index) => (
-                            <option key={index} value={group}>
-                                {group}
+                    ) : categories.length > 0 ? (
+                        categories.map((category, index) => (
+                            <option key={index} value={category}>
+                                {category}
                             </option>
                         ))
                     ) : (
