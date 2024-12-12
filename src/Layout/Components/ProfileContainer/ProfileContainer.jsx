@@ -20,7 +20,7 @@ const ProfileContainer = ({ imageSrc, name, role, bio }) => {
                 <div className="profile-bio">
                     <p>{bio}</p>
                 </div>
-                <button className="button button1">دنبال کردن</button>
+                <button className="button button1" style={{fontSize: "12px"}}>دنبال کردن</button>
             </div>
         </div>
     );
