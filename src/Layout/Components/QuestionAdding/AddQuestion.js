@@ -17,7 +17,7 @@ const AddQuestion = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch("http://localhost:5008/api/categories");
+                const response = await fetch("http://localhost:5004/api/categories");
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -59,7 +59,7 @@ const AddQuestion = () => {
         };
 
         try {
-            const response = await fetch("http://localhost:5008/api/questions/add", {
+            const response = await fetch("http://localhost:5004/api/questions/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -11,7 +11,7 @@ const AddCategory = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5008/api/categories/add", {
+            const response = await fetch("http://localhost:5004/api/categories/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

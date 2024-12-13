@@ -16,7 +16,7 @@ const QuestionContent = () => {
 
     // گرفتن امتیاز بازیکن
     useEffect(() => {
-        fetch(`http://localhost:5009/api/profiles/${username}`)
+        fetch(`http://localhost:5004/api/profiles/${username}`)
             .then(response => response.json())
             .then(data => setScore(data.score))
             .catch(error => console.error('Error fetching player score:', error));
@@ -25,9 +25,9 @@ const QuestionContent = () => {
     useEffect(() => {
         let url;
         if (random) {
-            url = 'http://localhost:5009/api/answering/random';
+            url = 'http://localhost:5004/api/answering/random';
         } else if (category) {
-            url = `http://localhost:5009/api/answering/category/${category}`;
+            url = `http://localhost:5004/api/answering/category/${category}`;
         } else {
             return;
         }

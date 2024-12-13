@@ -39,7 +39,7 @@ function PlayerQuestion({ username = "mobina" }) {
             .catch((error) => console.error("خطا در دریافت سوالات:", error));
 
         // دریافت سوالات پاسخ داده‌شده بر اساس username
-        fetch(`http://localhost:5009/api/answered-questions/${username}`)
+        fetch(`http://localhost:5004/api/answered-questions/${username}`)
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {

@@ -8,8 +8,8 @@ const List = ({ usage }) => {
 
     // Determine JSON path based on usage prop
     const url = usage === "Questions"
-        ? "http://localhost:5008/api/questions"
-        : "http://localhost:5008/api/categories";
+        ? "http://localhost:5004/api/questions"
+        : "http://localhost:5004/api/categories";
 
     // Fetch data from the JSON file
     useEffect(() => {

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './ProfileCard.css';
 
-const ProfileCard = ({usage, username = 'mobina'}) => {
+const ProfileCard = ({usage, username = "newplayer"}) => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const url = usage === "Player"
-        ? `http://localhost:5008/api/players/${username}`
-        : `http://localhost:5008/api/tarrahs/${username}`;
+        ? `http://localhost:5004/api/players/${username}`
+        : `http://localhost:5004/api/tarrahs/${username}`;
 
     useEffect(() => {
         // Fetch player data from the server
@@ -71,11 +71,11 @@ const ProfileCard = ({usage, username = 'mobina'}) => {
                         </tr>
                         <tr>
                             <td className="label">تعداد دنبال کننده ها :</td>
-                            <td className="value">{user.followers}</td>
+                            <td className="value">{user.followers.length}</td>
                         </tr>
                         <tr>
                             <td className="label">تعداد دنبال شونده ها :</td>
-                            <td className="value">{user.following}</td>
+                            <td className="value">{user.followings.length}</td>
                         </tr>
                         </tbody>
                     </table>

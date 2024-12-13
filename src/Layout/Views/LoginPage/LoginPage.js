@@ -18,7 +18,7 @@ const LoginPage = () => {
     }, [role, navigate]);
 
     const handleLoginSubmit = ({ username, password }) => {
-        fetch('http://localhost:5009/api/auth/login', {
+        fetch('http://localhost:5004/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ const LoginPage = () => {
     };
 
     const handleRegisterSubmit = ({ username, password, email, gender }) => {
-        fetch('http://localhost:5009/api/auth/register', {
+        fetch('http://localhost:5004/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
