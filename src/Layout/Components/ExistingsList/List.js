@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./List.css";
-import {data} from "react-router-dom";
 
 const List = ({ usage }) => {
     const [items, setItems] = useState(null); // Use one state for both questions and groups
