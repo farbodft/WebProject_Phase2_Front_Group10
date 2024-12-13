@@ -78,20 +78,15 @@ body {
 }
 
 .option.correct {
-    background-color: #132C47;
-}
-
-.option.correct:focus {
-    background-color: #4CAF50;
+    background-color: green;
+    color: white;
 }
 
 .option.wrong {
-    background-color: #132C47;
+    background-color: red;
+    color: white;
 }
 
-.option.wrong:focus {
-    background-color: #bb2012;
-}
 
 .option:hover {
     opacity: 0.9;
