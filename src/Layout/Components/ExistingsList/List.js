@@ -2,31 +2,34 @@ import React, { useEffect, useState } from "react";
 import "./List.css";
 
 const List = ({ usage }) => {
-    const [items, setItems] = useState([]); // Use one state for both questions and groups
+    const [items, setItems] = useState(null); // Use one state for both questions and groups
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // Determine JSON path based on usage prop
-    const jsonPath = usage === "Questions"
-        ? "/ExistingQuestions.json"
-        : "/ExistingGroups.json";
+    const url = usage === "Questions"
+        ? "http://localhost:5008/api/questions"
+        : "http://localhost:5008/api/categories";
 
     // Fetch data from the JSON file
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(jsonPath);
+                const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    throw new Error(`Failed to fetch! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setItems(usage === "Questions" ? data.questions : data.groups); // Ensure proper mapping
+                setItems(usage === "Questions" ? data.questions.map(q => q.text) : data.categories.map(c => c.categoryName)); // Ensure proper mapping
             } catch (err) {
                 setError(`Error fetching data: ${err.message}`);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchData();
-    }, [jsonPath, usage]);
+    }, [url, usage]);
 
     // Display error if any
     if (error) {
@@ -34,17 +37,21 @@ const List = ({ usage }) => {
     }
 
     // Display loading message while fetching data
-    if (!items || items.length === 0) {
+    if (loading) {
         return <p className="loading">Loading {usage.toLowerCase()}...</p>;
     }
 
+    // Display not found if there are no data
+    if (!items) {
+        return <p className="loading">no {usage.toLowerCase()} found</p>;
+    }
     // Render items dynamically
     return (
         <div className="Question" style={{ overflowY: "auto" }}>
             <div className="ribbon">
                 {usage === "Questions" ? "سوال‌های موجود" : "دسته‌بندی‌های موجود"}
             </div>
-            <div className="addedGroups">
+            <div className="addedCategories">
                 {items.map((item, index) => (
                     <h1 key={index}>
                         <b>{item}</b>

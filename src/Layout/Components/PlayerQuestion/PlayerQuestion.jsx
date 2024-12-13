@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PlayerQuestion.css";
 
 function PlayerQuestion({ username = "mobina" }) {
@@ -7,6 +8,7 @@ function PlayerQuestion({ username = "mobina" }) {
     const [answeredQuestions, setAnsweredQuestions] = useState([]); // ذخیره سوالات پاسخ داده‌شده
     const [selectedCategory, setSelectedCategory] = useState(""); // ذخیره دسته‌بندی انتخاب‌شده
     const [showError, setShowError] = useState(false); // برای نمایش پاپ آپ قرمز رنگ
+    const navigate = useNavigate();
 
     // بارگذاری داده‌ها از API
     useEffect(() => {
@@ -58,12 +60,15 @@ function PlayerQuestion({ username = "mobina" }) {
             return;
         }
 
+        // فیلتر سوال‌ها براساس دسته‌بندی انتخاب‌شده
         const filteredQuestions = questions.filter(
             (question) => question.category === selectedCategory
         );
 
         if (filteredQuestions.length > 0) {
+            // نمایش سوال مربوط به دسته‌بندی در کنسول
             console.log("سوال مربوط به دسته‌بندی انتخاب‌شده:", filteredQuestions[0]);
+            navigate('/QuestionPage', { state: { category: selectedCategory } }); // هدایت به صفحه `QuestionPage`
         } else {
             console.log("هیچ سوالی برای این دسته‌بندی یافت نشد.");
         }
@@ -74,12 +79,13 @@ function PlayerQuestion({ username = "mobina" }) {
         if (questions.length > 0) {
             const randomIndex = Math.floor(Math.random() * questions.length);
             console.log("سوال تصادفی:", questions[randomIndex]);
+            navigate('/QuestionPage', { state: { random: true } }); // هدایت به صفحه `QuestionPage`
         } else {
             console.log("هیچ سوالی در فایل JSON موجود نیست.");
         }
     };
 
-    // هندلر برای تغییر دسته‌بندی انتخاب‌شده
+    // هندلر برای تغییر دسته‌بندی انتخاب‌شده و مخفی کردن پاپ آپ خطا
     const handleCategoryChange = (e) => {
         const selected = e.target.value;
         setSelectedCategory(selected);
@@ -110,6 +116,7 @@ function PlayerQuestion({ username = "mobina" }) {
                         شروع بازی
                     </button>
 
+                    {/* نمایش پاپ آپ قرمز رنگ زمانی که دسته‌بندی انتخاب نشده */}
                     {showError && (
                         <div className="error-popup">
                             لطفا یک دسته‌بندی انتخاب کنید!
@@ -143,3 +150,4 @@ function PlayerQuestion({ username = "mobina" }) {
 }
 
 export default PlayerQuestion;
+

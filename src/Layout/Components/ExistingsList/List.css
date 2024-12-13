@@ -58,11 +58,8 @@ body {
     right: -20px; /* Triangle on the right */
 }
 
-.addedGroups {
 
-}
-
-.addedGroups h1 {
+.addedCategories h1 {
     text-decoration: none;
     color: #132C47;
     background-color: #FBAE54;
@@ -72,13 +69,13 @@ body {
     text-align: center;
 }
 
-.addedGroups h1:hover {
+.addedCategories h1:hover {
     color: #FBAE54;
     background-color: #132C47;
 }
 
 /* Scrollable box */
-.addedGroups {
+.addedCategories {
     font-family: Lalezar;
     display: flex;
     flex-direction: column;
@@ -94,21 +91,21 @@ body {
 }
 
 /* Styling the scrollbar */
-.addedGroups::-webkit-scrollbar {
+.addedCategories::-webkit-scrollbar {
     width: 20px; /* Scrollbar width */
 }
 
-.addedGroups::-webkit-scrollbar-track {
+.addedCategories::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #FBAE54; /* Track shadow */
     border-radius: 10px; /* Track rounded corners */
 }
 
-.addedGroups::-webkit-scrollbar-thumb {
+.addedCategories::-webkit-scrollbar-thumb {
     background: #FBAE54; /* Scrollbar handle color */
     border-radius: 10px; /* Rounded handle */
 }
 
-.addedGroups::-webkit-scrollbar-thumb:hover {
+.addedCategories::-webkit-scrollbar-thumb:hover {
     background: #d28f45; /* Darker  on hover */
 }
 
@@ -120,7 +117,7 @@ body {
         height: auto;
         width: 100%;
     }
-    .addedGroups {
+    .addedCategories {
         width: 80%;
     }
 }

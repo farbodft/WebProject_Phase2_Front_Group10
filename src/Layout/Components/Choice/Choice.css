@@ -1,0 +1,175 @@
+@font-face {
+    font-family: Lalezar;
+    src: url("../../../Font/Lalezar-Regular.ttf");
+    font-weight: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Full height for body and html */
+    margin: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* background-image: url("../../../../public/photo/DarkBack.jpg"); */
+    background-attachment: scroll;
+    background-size: 150% 150%;
+}
+
+.header {
+    background-color: #FBAE54;
+    font-family: Lalezar;
+    color :#132C47 ;
+    justify-content: space-evenly;
+    border-radius: 30px;
+    margin-top: 10%;
+    margin-left: 9%;
+    margin-right: 9%;
+    text-align: center;
+    font-size: 5vw;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.logo-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 60px; 
+    }
+    .header {
+        margin-top: 240px;
+    }
+    .button {
+        margin-top: 50px;
+    }
+    footer {
+        margin-top: 100px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 50px; 
+    }
+    .header {
+        margin-top: 240px;
+    }
+    .button {
+        margin-top: 50px;
+    }
+    footer {
+        margin-top: 100px;
+    }
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.button {
+    background-color: #E27663;
+    font-family: Lalezar;
+    color: white;
+    border: none;
+    padding: 5%;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 6%;
+    margin-bottom: 9%;
+    font-size: 4vw;
+    width: 35%;
+    
+}
+
+.button.secondary {
+    background-color: #A0DBE0;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200vh; /* Enough height to force scrolling */
+}
+
+
+footer {
+    background-color: #132C47;
+    color: white;
+    padding: 25px 0;
+    text-align: center;
+    margin-top: 220px;
+    box-shadow: 0 -5px 5px #FBAE54;
+    direction: rtl;
+}
+
+.footer-content h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-family: Lalezar;
+    text-shadow: #A0DBE0 1px 1px 0;
+}
+
+.footer-content p {
+    margin: 10px 0 15px;
+    font-size: 1rem;
+    color: white;
+}
+
+.socials {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.socials li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.socials li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.socials li a:hover {
+    color: #fba54b;
+}
+
+.footer-bottom {
+    background-color: #1A3B5E;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+

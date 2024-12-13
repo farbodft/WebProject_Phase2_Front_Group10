@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
-import "./ProfileCard.css";
+import React, {useEffect, useState} from 'react';
+import './ProfileCard.css';
 
-const ProfileCard = ({ username = "mobina" }) => {
-    const [player, setPlayer] = useState(null);
+const ProfileCard = ({usage, username = 'mobina'}) => {
+    const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const url = usage === "Player"
+        ? `http://localhost:5008/api/players/${username}`
+        : `http://localhost:5008/api/tarrahs/${username}`;
+
     useEffect(() => {
         // Fetch player data from the server
-        const fetchPlayer = async () => {
+        const fetchUser = async () => {
             try {
-                const response = await fetch(`http://localhost:5004/api/player/${username}`);
+                const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error("Failed to fetch player data.");
+                    throw new Error("Failed to fetch User data.");
                 }
                 const data = await response.json();
-                setPlayer(data);
+                setUser(data);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -23,8 +27,8 @@ const ProfileCard = ({ username = "mobina" }) => {
             }
         };
 
-        fetchPlayer();
-    }, [username]);
+        fetchUser();
+    }, [usage, username]);
 
     if (loading) {
         return <div className="loading">در حال بارگذاری...</div>;
@@ -34,51 +38,89 @@ const ProfileCard = ({ username = "mobina" }) => {
         return <div className="error">خطا: {error}</div>;
     }
 
-    if (!player) {
-        return <div className="no-data">بازیکنی یافت نشد!</div>;
+    if (!user) {
+        return <div className="no-data">{usage === 'Player' ? 'بازیکنی یافت نشد!' : 'طراحی یافت نشد!'}</div>;
     }
 
-    return (
-        <div className="card">
-            <div className="left-container">
-                <img
-                    className="profile"
-                    src={player.imageSrc}
-                    alt={`${player.username}'s Profile`}
-                />
-                <h2 className="gradienttext">{player.username}</h2>
-                <p>{player.role}</p>
+    if(usage === "Player") {
+        return (
+            <div className="card">
+                <div className="left-container">
+                    <img
+                        className="profile"
+                        src={user.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
+                        alt={`${user.username}'s profile`} />
+                    <h2 className="gradienttext">{user.username}</h2>
+                    <p>بازیکن</p>
+                </div>
+                <div className="right-container">
+                    <h3 className="gradienttext">اطلاعات بازیکن</h3>
+                    <table className="player-info-table">
+                        <tbody>
+                        <tr>
+                            <td className="label">نام کاربری :</td>
+                            <td className="value">{user.username}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">تعداد پاسخ ها :</td>
+                            <td className="value">{user.challenges}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">ایمیل :</td>
+                            <td className="value">{user.email}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">تعداد دنبال کننده ها :</td>
+                            <td className="value">{user.followers}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">تعداد دنبال شونده ها :</td>
+                            <td className="value">{user.following}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div className="credit">برای شروع بازی به بخش مدیریت سوال ها بروید!</div>
+                </div>
             </div>
-            <div className="right-container">
-                <h3 className="gradienttext">اطلاعات بازیکن</h3>
-                <table className="player-info-table">
-                    <tbody>
-                    <tr>
-                        <td className="label">نام کاربری :</td>
-                        <td className="value">{player.username}</td>
-                    </tr>
-                    <tr>
-                        <td className="label">تعداد چالش‌ها :</td>
-                        <td className="value">{player.challenges}</td>
-                    </tr>
-                    <tr>
-                        <td className="label">ایمیل :</td>
-                        <td className="value">{player.email}</td>
-                    </tr>
-                    <tr>
-                        <td className="label">تعداد دنبال‌کننده‌ها :</td>
-                        <td className="value">{(player.followers || []).length}</td>
-                    </tr>
-                    <tr>
-                        <td className="label">تعداد دنبال‌شونده‌ها :</td>
-                        <td className="value">{(player.followings || []).length}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div className="credit">برای شروع بازی به بخش مدیریت سوال‌ها بروید!</div>
+        );
+    } else {
+        return (
+            <div className="card">
+                <div className="left-container" style={{backgroundColor: '#E27663'}}>
+                    <img className="profile"
+                         src={user.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
+                         alt="Profile Image" />
+                    <h2 className="gradienttext">{user.username}</h2>
+                    <p>طراح</p>
+                </div>
+                <div className="right-container" style={{backgroundColor: '#E27663'}}>
+                    <h3 className="gradienttext">اطلاعات طراح</h3>
+                    <table className="player-info-table">
+                        <tbody>
+                        <tr>
+                            <td className="label">نام کاربری :</td>
+                            <td className="value">{user.username}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">تعداد سوال ها :</td>
+                            <td className="value">{user.questionCount}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">ایمیل :</td>
+                            <td className="value">{user.email}</td>
+                        </tr>
+                        <tr>
+                            <td className="label">تعداد دنبال کننده:</td>
+                            <td className="value">{user.followers.length}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div className="credit">برای طرح سوال جدید به بخش مدیریت سوال ها بروید!</div>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+
 };
 
 export default ProfileCard;

@@ -6,7 +6,7 @@ import PlayerQuestion from "../../Components/PlayerQuestion/PlayerQuestion";
 const QuestionBox = () => {
     return (
         <div>
-            <Navbar/>
+            <Navbar usage={"Player"}/>
             <PlayerQuestion/>
             <Footer/>
         </div>
