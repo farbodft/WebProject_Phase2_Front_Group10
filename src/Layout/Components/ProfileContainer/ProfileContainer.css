@@ -36,6 +36,7 @@ body {
 
 }
 
+
 /* Show profile card on image focus */
 .profile-trigger:focus + .profile-card {
     display: inline-block;

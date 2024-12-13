@@ -10,22 +10,25 @@ function PlayerQuestion({ username = "mobina" }) {
     const [showError, setShowError] = useState(false); // برای نمایش پاپ آپ قرمز رنگ
     const navigate = useNavigate();
 
+    // بارگذاری داده‌ها از API
     useEffect(() => {
-        fetch("http://localhost:5009/api/categories")
+        // دریافت دسته‌بندی‌ها
+        fetch("http://localhost:5004/api/categories")
             .then((response) => response.json())
             .then((data) => {
-                if (Array.isArray(data)) {
-                    setCategories(data);
+                if (data.categories && Array.isArray(data.categories)) {
+                    setCategories(data.categories);
                 } else {
                     console.error("داده‌های دسته‌بندی‌ها صحیح نیستند:", data);
                 }
             })
             .catch((error) => console.error("خطا در دریافت دسته‌بندی‌ها:", error));
 
-        fetch("http://localhost:5009/api/questions")
+        // دریافت سوالات
+        fetch("http://localhost:5004/api/questions")
             .then((response) => response.json())
             .then((data) => {
-                if (Array.isArray(data)) {
+                if (data && Array.isArray(data)) {
                     setQuestions(data);
                 } else if (data.questions && Array.isArray(data.questions)) {
                     setQuestions(data.questions);
@@ -35,6 +38,7 @@ function PlayerQuestion({ username = "mobina" }) {
             })
             .catch((error) => console.error("خطا در دریافت سوالات:", error));
 
+        // دریافت سوالات پاسخ داده‌شده بر اساس username
         fetch(`http://localhost:5009/api/answered-questions/${username}`)
             .then((response) => response.json())
             .then((data) => {
@@ -49,15 +53,20 @@ function PlayerQuestion({ username = "mobina" }) {
             .catch((error) => console.error("خطا در دریافت سوالات پاسخ داده‌شده:", error));
     }, [username]);
 
+    // هندلر برای شروع بازی براساس دسته‌بندی انتخاب‌شده
     const handleStartGame = () => {
         if (!selectedCategory) {
             setShowError(true);
             return;
         }
+
+        // فیلتر سوال‌ها براساس دسته‌بندی انتخاب‌شده
         const filteredQuestions = questions.filter(
             (question) => question.category === selectedCategory
         );
+
         if (filteredQuestions.length > 0) {
+            // نمایش سوال مربوط به دسته‌بندی در کنسول
             console.log("سوال مربوط به دسته‌بندی انتخاب‌شده:", filteredQuestions[0]);
             navigate('/QuestionPage', { state: { category: selectedCategory } }); // هدایت به صفحه `QuestionPage`
         } else {
@@ -65,6 +74,7 @@ function PlayerQuestion({ username = "mobina" }) {
         }
     };
 
+    // هندلر برای نمایش سوال تصادفی
     const handleRandomQuestion = () => {
         if (questions.length > 0) {
             const randomIndex = Math.floor(Math.random() * questions.length);
@@ -75,6 +85,7 @@ function PlayerQuestion({ username = "mobina" }) {
         }
     };
 
+    // هندلر برای تغییر دسته‌بندی انتخاب‌شده و مخفی کردن پاپ آپ خطا
     const handleCategoryChange = (e) => {
         const selected = e.target.value;
         setSelectedCategory(selected);
@@ -83,6 +94,7 @@ function PlayerQuestion({ username = "mobina" }) {
 
     return (
         <div>
+            {/* باکس انتخاب دسته‌بندی */}
             <div className="answeredBox">
                 <div className="ribbon">انتخاب بازی</div>
                 <button onClick={handleRandomQuestion} className="randomQuestion">
@@ -91,20 +103,20 @@ function PlayerQuestion({ username = "mobina" }) {
                 <div className="ChooseQuestion">
                     <div className="label">دسته‌بندی مورد نظر انتخاب کن و خودت به چالش بکش!</div>
                     <select id="category" onChange={handleCategoryChange} value={selectedCategory}>
-                        <option value="" disabled>دسته‌بندی‌ها</option>
-                        {categories.length > 0 ? (
-                            categories.map((category, index) => (
-                                <option key={index} value={category}>
-                                    {category}
-                                </option>
-                            ))
-                        ) : (
-                            <option disabled>دسته‌بندی‌ها بارگذاری نمی‌شوند.</option>
-                        )}
+                        <option value="" disabled>
+                            دسته‌بندی‌ها
+                        </option>
+                        {categories.map((category, index) => (
+                            <option key={index} value={category.categoryName}>
+                                {category.categoryName}
+                            </option>
+                        ))}
                     </select>
                     <button onClick={handleStartGame} className="selectedQuestion">
                         شروع بازی
                     </button>
+
+                    {/* نمایش پاپ آپ قرمز رنگ زمانی که دسته‌بندی انتخاب نشده */}
                     {showError && (
                         <div className="error-popup">
                             لطفا یک دسته‌بندی انتخاب کنید!
@@ -112,13 +124,18 @@ function PlayerQuestion({ username = "mobina" }) {
                     )}
                 </div>
             </div>
+
+            {/* باکس نمایش لیست سوالات پاسخ داده‌شده */}
             <div className="questionList">
                 <div className="text-in-questionList">سوال‌های پاسخ داده‌شده</div>
                 <div className="scroll-box">
                     <ul className="question-items">
                         {answeredQuestions.length > 0 ? (
                             answeredQuestions.map((question, index) => (
-                                <li key={index} className={question.answered ? "true" : "false"}>
+                                <li
+                                    key={index}
+                                    className={question.answered ? "true" : "false"}
+                                >
                                     {question.text}
                                 </li>
                             ))
@@ -133,3 +150,4 @@ function PlayerQuestion({ username = "mobina" }) {
 }
 
 export default PlayerQuestion;
+
