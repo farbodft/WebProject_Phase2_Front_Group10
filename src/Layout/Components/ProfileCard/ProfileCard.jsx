@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileCard.css";
 
-const ProfileCard = ({ username = "mobina"}) => {
+const ProfileCard = ({ username = "mobina" }) => {
     const [player, setPlayer] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -10,7 +10,7 @@ const ProfileCard = ({ username = "mobina"}) => {
         // Fetch player data from the server
         const fetchPlayer = async () => {
             try {
-                const response = await fetch(`http://localhost:5009/api/player/${username}`);
+                const response = await fetch(`http://localhost:5004/api/player/${username}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch player data.");
                 }
@@ -44,9 +44,9 @@ const ProfileCard = ({ username = "mobina"}) => {
                 <img
                     className="profile"
                     src={player.imageSrc}
-                    alt={`${player.name}'s Profile`}
+                    alt={`${player.username}'s Profile`}
                 />
-                <h2 className="gradienttext">{player.name}</h2>
+                <h2 className="gradienttext">{player.username}</h2>
                 <p>{player.role}</p>
             </div>
             <div className="right-container">
@@ -67,11 +67,11 @@ const ProfileCard = ({ username = "mobina"}) => {
                     </tr>
                     <tr>
                         <td className="label">تعداد دنبال‌کننده‌ها :</td>
-                        <td className="value">{player.followers}</td>
+                        <td className="value">{(player.followers || []).length}</td>
                     </tr>
                     <tr>
                         <td className="label">تعداد دنبال‌شونده‌ها :</td>
-                        <td className="value">{player.following}</td>
+                        <td className="value">{(player.followings || []).length}</td>
                     </tr>
                     </tbody>
                 </table>

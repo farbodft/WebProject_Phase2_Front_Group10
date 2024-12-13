@@ -10,12 +10,12 @@ function PlayerQuestion({ username = "mobina" }) {
 
     // بارگذاری داده‌ها از API
     useEffect(() => {
-        fetch("http://localhost:5009/api/categories")
+        // دریافت دسته‌بندی‌ها
+        fetch("http://localhost:5004/api/categories")
             .then((response) => response.json())
             .then((data) => {
-                // بررسی مستقیم اگر داده‌ها آرایه باشند
-                if (Array.isArray(data)) {
-                    setCategories(data);
+                if (data.categories && Array.isArray(data.categories)) {
+                    setCategories(data.categories);
                 } else {
                     console.error("داده‌های دسته‌بندی‌ها صحیح نیستند:", data);
                 }
@@ -23,10 +23,9 @@ function PlayerQuestion({ username = "mobina" }) {
             .catch((error) => console.error("خطا در دریافت دسته‌بندی‌ها:", error));
 
         // دریافت سوالات
-        fetch("http://localhost:5009/api/questions")
+        fetch("http://localhost:5004/api/questions")
             .then((response) => response.json())
             .then((data) => {
-                // بررسی اگر داده‌ها آرایه باشند
                 if (data && Array.isArray(data)) {
                     setQuestions(data);
                 } else if (data.questions && Array.isArray(data.questions)) {
@@ -36,6 +35,7 @@ function PlayerQuestion({ username = "mobina" }) {
                 }
             })
             .catch((error) => console.error("خطا در دریافت سوالات:", error));
+
         // دریافت سوالات پاسخ داده‌شده بر اساس username
         fetch(`http://localhost:5009/api/answered-questions/${username}`)
             .then((response) => response.json())
@@ -100,15 +100,11 @@ function PlayerQuestion({ username = "mobina" }) {
                         <option value="" disabled>
                             دسته‌بندی‌ها
                         </option>
-                        {categories.length > 0 ? (
-                            categories.map((category, index) => (
-                                <option key={index} value={category}>
-                                    {category}
-                                </option>
-                            ))
-                        ) : (
-                            <option disabled>دسته‌بندی‌ها بارگذاری نمی‌شوند.</option>
-                        )}
+                        {categories.map((category, index) => (
+                            <option key={index} value={category.categoryName}>
+                                {category.categoryName}
+                            </option>
+                        ))}
                     </select>
                     <button onClick={handleStartGame} className="selectedQuestion">
                         شروع بازی

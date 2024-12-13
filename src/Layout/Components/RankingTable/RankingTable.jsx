@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProfileContainer from '../ProfileContainer/ProfileContainer';
 import './RankingTable.css';
 
-const RankingTable = () => {
+const RankingTable = ({username = "mobina"}) => {
     const [players, setPlayers] = useState([]); // لیست بازیکنان
     const [loading, setLoading] = useState(true); // وضعیت بارگذاری
     const [error, setError] = useState(null); // مدیریت خطا
@@ -11,7 +11,7 @@ const RankingTable = () => {
         // دریافت اطلاعات پروفایل از API
         const fetchProfiles = async () => {
             try {
-                const response = await fetch('http://localhost:5009/api/profiles');
+                const response = await fetch('http://localhost:5004/api/profiles/players');
                 if (!response.ok) {
                     throw new Error('Failed to fetch player profiles.');
                 }
@@ -68,6 +68,7 @@ const RankingTable = () => {
                                 name={player.name}
                                 role={player.role}
                                 bio={player.bio}
+                                username={username}
                             />
                         </td>
                         <td className="ranking-table-td">{player.rank}</td>
