@@ -7,7 +7,7 @@ function PlayerQuestion({ username = "mobina" }) {
     const [questions, setQuestions] = useState([]); // ذخیره سوالات دسته‌بندی‌ها
     const [answeredQuestions, setAnsweredQuestions] = useState([]); // ذخیره سوالات پاسخ داده‌شده
     const [selectedCategory, setSelectedCategory] = useState(""); // ذخیره دسته‌بندی انتخاب‌شده
-    const [showError, setShowError] = useState(false); // برای نمایش پاپ آپ قرمز رنگ
+    const [showError, setShowError] = useState(""); // پیام خطا
     const navigate = useNavigate();
 
     // بارگذاری داده‌ها از API
@@ -56,7 +56,7 @@ function PlayerQuestion({ username = "mobina" }) {
     // هندلر برای شروع بازی براساس دسته‌بندی انتخاب‌شده
     const handleStartGame = () => {
         if (!selectedCategory) {
-            setShowError(true);
+            setShowError("لطفا یک دسته‌بندی انتخاب کنید!");
             return;
         }
 
@@ -66,11 +66,10 @@ function PlayerQuestion({ username = "mobina" }) {
         );
 
         if (filteredQuestions.length > 0) {
-            // نمایش سوال مربوط به دسته‌بندی در کنسول
             console.log("سوال مربوط به دسته‌بندی انتخاب‌شده:", filteredQuestions[0]);
             navigate('/QuestionPage', { state: { category: selectedCategory } }); // هدایت به صفحه `QuestionPage`
         } else {
-            console.log("هیچ سوالی برای این دسته‌بندی یافت نشد.");
+            setShowError("هیچ سوالی در این دسته‌بندی یافت نشد.");
         }
     };
 
@@ -89,7 +88,7 @@ function PlayerQuestion({ username = "mobina" }) {
     const handleCategoryChange = (e) => {
         const selected = e.target.value;
         setSelectedCategory(selected);
-        setShowError(false);
+        setShowError(""); // مخفی کردن پیام خطا
     };
 
     return (
@@ -116,10 +115,10 @@ function PlayerQuestion({ username = "mobina" }) {
                         شروع بازی
                     </button>
 
-                    {/* نمایش پاپ آپ قرمز رنگ زمانی که دسته‌بندی انتخاب نشده */}
+                    {/* نمایش پاپ آپ خطا زمانی که دسته‌بندی انتخاب نشده یا سوالی موجود نیست */}
                     {showError && (
                         <div className="error-popup">
-                            لطفا یک دسته‌بندی انتخاب کنید!
+                            {showError}
                         </div>
                     )}
                 </div>
@@ -150,4 +149,3 @@ function PlayerQuestion({ username = "mobina" }) {
 }
 
 export default PlayerQuestion;
-

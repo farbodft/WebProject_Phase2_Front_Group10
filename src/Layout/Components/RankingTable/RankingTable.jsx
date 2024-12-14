@@ -64,7 +64,7 @@ const RankingTable = ({username = "mobina"}) => {
                     >
                         <td className="ranking-table-td">
                             <ProfileContainer
-                                imageSrc={player.imageSrc}
+                                imageSrc={player.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
                                 name={player.name}
                                 role={player.role}
                                 bio={player.bio}
