@@ -6,7 +6,7 @@ const QuestionContent = () => {
     const location = useLocation();
     const category = location.state?.category;
     const random = location.state?.random;
-    const username = "mobina"; // فرض بر اینکه نام کاربری ثابت باشد
+    const username = sessionStorage.getItem("username");
     const [questions, setQuestions] = useState([]); // ذخیره سوالات
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // شاخص سوال فعلی
     const [loading, setLoading] = useState(true); // حالت بارگذاری
