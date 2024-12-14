@@ -76,7 +76,7 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower }) => {
                 <div className="profile-bio">
                     <p>{bio}</p>
                 </div>
-                <button className="button button1" onClick={handleFollow}>
+                <button className="button button1" onClick={handleFollow} style={{fontSize: "12px"}}>
                     {isFollowing ? 'دنبال کرده' : 'دنبال کردن'}
                 </button>
             </div>
