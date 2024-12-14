@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './QuestionContent.css';
-import text from 'body-parser/lib/types/text';
 
 const QuestionContent = () => {
     const location = useLocation();
@@ -61,20 +60,20 @@ const QuestionContent = () => {
         const scoreDelta = currentQuestion.difficulty === 'Easy' ? 1 :
                            currentQuestion.difficulty === 'Medium' ? 2 : 3;
 
-        if (isCorrect) {
-            setScore(prevScore => prevScore + scoreDelta);
-        } else {
-            setScore(prevScore => prevScore - scoreDelta);
-        }
+        const newScore = isCorrect ? score + scoreDelta : score - scoreDelta;
+        setScore(newScore);
 
         const requestbody = {
-            score: score,
+            score: newScore,
             text: currentQuestion.text,
             answer: isCorrect
         };
 
         fetch(url, {
             method: `PUT`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(requestbody),
         });
 

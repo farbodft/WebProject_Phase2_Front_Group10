@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PlayerQuestion.css";
 
-function PlayerQuestion({ username = "mobina" }) {
+function PlayerQuestion() {
     const [categories, setCategories] = useState([]); // ذخیره دسته‌بندی‌ها
     const [questions, setQuestions] = useState([]); // ذخیره سوالات دسته‌بندی‌ها
     const [answeredQuestions, setAnsweredQuestions] = useState([]); // ذخیره سوالات پاسخ داده‌شده
     const [selectedCategory, setSelectedCategory] = useState(""); // ذخیره دسته‌بندی انتخاب‌شده
     const [showError, setShowError] = useState(""); // پیام خطا
     const navigate = useNavigate();
+    const username = sessionStorage.getItem("username");
 
     // بارگذاری داده‌ها از API
     useEffect(() => {
