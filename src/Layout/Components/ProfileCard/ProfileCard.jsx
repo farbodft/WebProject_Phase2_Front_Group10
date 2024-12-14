@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import './ProfileCard.css';
 
-const ProfileCard = ({usage, username = "newplayer"}) => {
+const ProfileCard = ({usage}) => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const username = sessionStorage.getItem("username"); // Get the username from sessionStorage
+
     const url = usage === "Player"
-        ? `http://localhost:5004/api/players/${username}`
+        ? `http://localhost:5004/api/player/${username}`
         : `http://localhost:5004/api/tarrahs/${username}`;
 
     useEffect(() => {
@@ -70,11 +72,11 @@ const ProfileCard = ({usage, username = "newplayer"}) => {
                             <td className="value">{user.email}</td>
                         </tr>
                         <tr>
-                            <td className="label">تعداد دنبال کننده ها :</td>
+                            <td className="label">تعداد دنبال کننده:</td>
                             <td className="value">{user.followers.length}</td>
                         </tr>
                         <tr>
-                            <td className="label">تعداد دنبال شونده ها :</td>
+                            <td className="label">تعداد دنبال شونده:</td>
                             <td className="value">{user.followings.length}</td>
                         </tr>
                         </tbody>

@@ -55,7 +55,7 @@ const AddQuestion = () => {
             choices: [choice1, choice2, choice3, choice4],
             correctChoice: parseInt(correctChoice),
             difficulty,
-            tarrahName: "Sara Mohammadi", //Mocked value
+            tarrahName: sessionStorage.getItem("username"),
         };
 
         try {
