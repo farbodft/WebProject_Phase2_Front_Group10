@@ -58,6 +58,7 @@ const LoginPage = () => {
             if (response.ok) {
                 response.text().then(data => {
                     setRegisterError(''); // پاک کردن پیام خطا در صورت موفقیت
+                    sessionStorage.setItem("username", username); // Save username to sessionStorage
                     if (role === 'designer') {
                         navigate('/TarrahMainPage');
                     } else if (role === 'player') {

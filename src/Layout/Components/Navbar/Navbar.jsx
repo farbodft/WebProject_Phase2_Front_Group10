@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = ({usage}) => {
+
+    const handleLogout = () => {
+        sessionStorage.clear();
+        window.location.href='/';
+    };
+
     if(usage === "Player") {
         return (
             <nav className="navbar">
-                <button onClick={() => window.location.href='/'} className="navbar-btn">خروج</button>
+                <button onClick={handleLogout} className="navbar-btn">خروج</button>
                 <div className="right-section">
                     <div className="nav-links">
                         <Link to="/QuestionBox">مدیریت سوالات</Link>
@@ -23,7 +29,7 @@ const Navbar = ({usage}) => {
     else {
         return (
             <nav className="navbar" style={{ backgroundColor: '#E27663' }}>
-                <button onClick={() => window.location.href='/'} className="navbar-btn">خروج</button>
+                <button onClick={handleLogout} className="navbar-btn">خروج</button>
                 <div className="right-section">
                     <div className="nav-links">
                         <Link to="/TarrahQuestionManagement">مدیریت سوالات</Link>
