@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileContainer.css';
 
-const ProfileContainer = ({ imageSrc, following, role, bio, follower }) => {
+const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose }) => {
     const [isFollowing, setIsFollowing] = useState(false); // Track if the user is following
-
-    // Check if the user is already following when the component is mounted
+    const [isLoading, setIsLoading] = useState(false); // Track loading state
+    const [popupMessage, setPopupMessage] = useState(''); // Track the popup message
+    const [isPopupVisible, setIsPopupVisible] = useState(false); // Track the popup visibility
+    const [isSuccess, setIsSuccess] = useState(false); // Track the success of the follow action
+    console.log(following);
     useEffect(() => {
         const checkFollowingStatus = async () => {
             try {
-                console.log("Follower:", follower);
-                console.log("Following:", following);
-
-                // Fetch the followings of the current user (follower)
-                const response = await fetch(`http://localhost:5004/api/profiles/players/followings/${follower}`);
+                const response = await fetch(`http://localhost:5004/api/profiles/followings/${follower}`);
                 const data = await response.json();
-                console.log("Fetched followings:", data); // Debugging line
 
-                // If the player is already in the followings list, set the state to true
-                if (data.followings && data.followings.includes(following)) {
+                if (data.followings && data.followings.includes(follower)) {
                     setIsFollowing(true);
                 }
             } catch (error) {
@@ -31,54 +28,66 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower }) => {
 
     }, [follower, following]);
 
-    // Handle follow button click
     const handleFollow = async () => {
-        try {
-            console.log("Sending follow request for:", following);
-            console.log("Follower:", follower);
+        setIsLoading(true); // Start loading
 
-            const response = await fetch(`http://localhost:5004/api/profiles/players/followings/${follower}`, {
+        try {
+            const response = await fetch(`http://localhost:5004/api/profiles/following/${following}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    following: following, // Send the name of the player to follow
-                }),
+                body: JSON.stringify({ follower })
             });
 
-            // Check if the response is successful
             if (response.ok) {
-                setIsFollowing(true);  // Set to true once the user follows
-                console.log(`${follower} is now following ${following}`);
+                setIsFollowing(true);
+                setPopupMessage('دنبال کردن موفقیت آمیز بود');
+                setIsSuccess(true);
+            } else if (response.status === 409) {
+                setPopupMessage('شما این کاربر را دنبال کرده‌اید');
+                setIsSuccess(false);
             } else {
-                console.log('Error following user. Response not OK:', response.status);
-                const errorDetails = await response.text();
-                console.log('Error details:', errorDetails);
+                setPopupMessage(`خطا در دنبال کردن کاربر: ${response.status}`);
+                setIsSuccess(false);
             }
         } catch (error) {
             console.error('Error while sending follow request:', error);
+            setPopupMessage('خطا در دنبال کردن کاربر');
+            setIsSuccess(false);
+        }
+        setIsLoading(false); // End loading
+        setIsPopupVisible(true); // Show the popup
+        setTimeout(() => setIsPopupVisible(false), 3000); // Hide the popup after 3 seconds
+    };
+
+    const handleCloseClick = () => {
+        console.log("Close button clicked!"); // اضافه کردن لاگ
+        if (onClose) {
+            onClose();
         }
     };
 
     return (
         <div className="profile-container">
-            <a href="#" className="profile-trigger">
-                <img src={imageSrc} alt={`Profile of ${following}`} className="profile-img" />
-            </a>
-
             <div tabIndex="-1" className="profile-card">
+                <button className="close-button" onClick={handleCloseClick}>X</button>
                 <header>
                     <img src={imageSrc} alt={`Profile of ${following}`} />
-                    <h1>{following}</h1> {/* Display following name here */}
-                    <h2>{role}</h2>
+                    <h1>{following}</h1>
+                    <h2 className="profile-role">بازیکن</h2>
                 </header>
                 <div className="profile-bio">
                     <p>{bio}</p>
                 </div>
-                <button className="button button1" onClick={handleFollow} style={{fontSize: "12px"}}>
-                    {isFollowing ? 'دنبال کرده' : 'دنبال کردن'}
+                <button className="button-check" onClick={handleFollow} disabled={isLoading} style={{ fontSize: "12px" }}>
+                    {isLoading ? 'در حال ارسال...' : isFollowing ? 'دنبال کرده' : 'دنبال کردن'}
                 </button>
+                {isPopupVisible && (
+                    <div className={`popup-message ${isSuccess ? 'success' : 'error'}`}>
+                        {popupMessage}
+                    </div>
+                )}
             </div>
         </div>
     );

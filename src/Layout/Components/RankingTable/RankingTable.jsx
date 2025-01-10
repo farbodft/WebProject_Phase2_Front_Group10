@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfileContainer from '../ProfileContainer/ProfileContainer';
 import './RankingTable.css';
 
-const RankingTable = ({username = "mobina"}) => {
+const RankingTable = ({ username = "mobina" }) => {
     const [players, setPlayers] = useState([]); // لیست بازیکنان
     const [loading, setLoading] = useState(true); // وضعیت بارگذاری
     const [error, setError] = useState(null); // مدیریت خطا
+    const [selectedPlayer, setSelectedPlayer] = useState(null); // پروفایل انتخاب‌شده
+    const [isProfileVisible, setIsProfileVisible] = useState(false); // وضعیت نمایش پروفایل
 
     useEffect(() => {
-        // دریافت اطلاعات پروفایل از API
         const fetchProfiles = async () => {
             try {
                 const response = await fetch('http://localhost:5004/api/profiles/players');
@@ -17,15 +18,14 @@ const RankingTable = ({username = "mobina"}) => {
                 }
                 const data = await response.json();
 
-                // مرتب‌سازی بازیکنان بر اساس امتیاز به صورت نزولی
                 const sortedPlayers = data
-                    .sort((a, b) => b.score - a.score) // مرتب کردن
+                    .sort((a, b) => b.score - a.score)
                     .map((player, index) => ({
                         ...player,
-                        rank: index + 1, // تعیین رتبه بازیکن
+                        rank: index + 1,
                     }));
 
-                setPlayers(sortedPlayers); // ذخیره بازیکنان مرتب‌شده
+                setPlayers(sortedPlayers);
                 setLoading(false);
             } catch (err) {
                 setError(err.message);
@@ -35,6 +35,19 @@ const RankingTable = ({username = "mobina"}) => {
 
         fetchProfiles();
     }, []);
+
+    const handleProfileClick = (player) => {
+        setSelectedPlayer(player);
+        setIsProfileVisible(true);
+        console.log("Selected Player:", player); // اضافه کردن لاگ
+        console.log({username});
+    };
+
+    const handleClose = () => {
+        console.log("Close action triggered!"); // اضافه کردن لاگ
+        setIsProfileVisible(false);
+        setSelectedPlayer(null);
+    };
 
     if (loading) {
         return <div className="loading">در حال بارگذاری...</div>;
@@ -61,14 +74,13 @@ const RankingTable = ({username = "mobina"}) => {
                     <tr
                         key={player.username}
                         className={player.rank % 2 === 0 ? 'ranking-table-tr-even' : 'ranking-table-tr-odd'}
+                        onClick={() => handleProfileClick(player)}
                     >
                         <td className="ranking-table-td">
-                            <ProfileContainer
-                                imageSrc={player.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
-                                name={player.name}
-                                role={player.role}
-                                bio={player.bio}
-                                username={username}
+                            <img
+                                src={player.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
+                                alt="profile"
+                                className="profile-img"
                             />
                         </td>
                         <td className="ranking-table-td">{player.rank}</td>
@@ -79,6 +91,17 @@ const RankingTable = ({username = "mobina"}) => {
                 ))}
                 </tbody>
             </table>
+
+            {isProfileVisible && selectedPlayer && (
+                <ProfileContainer
+                    imageSrc={selectedPlayer.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
+                    following={selectedPlayer.username}
+                    role={selectedPlayer.role}
+                    bio={selectedPlayer.bio}
+                    follower={username}
+                    onClose={handleClose}
+                />
+            )}
         </div>
     );
 };
