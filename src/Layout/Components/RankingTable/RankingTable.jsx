@@ -96,8 +96,8 @@ const RankingTable = ({ username = "mobina" }) => {
                 <ProfileContainer
                     imageSrc={selectedPlayer.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
                     following={selectedPlayer.username}
-                    role={selectedPlayer.role}
-                    bio={selectedPlayer.bio}
+                    role="بازیکن"
+                    bio="سلام! منم یکی از بازیکن‌های سوال پیچ هستم، خوشحال میشم باهم رقابت کنیم."
                     follower={username}
                     onClose={handleClose}
                 />

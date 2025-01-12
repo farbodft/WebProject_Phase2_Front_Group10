@@ -7,11 +7,22 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
     const [popupMessage, setPopupMessage] = useState(''); // Track the popup message
     const [isPopupVisible, setIsPopupVisible] = useState(false); // Track the popup visibility
     const [isSuccess, setIsSuccess] = useState(false); // Track the success of the follow action
-    console.log(following);
+    console.log(following,follower);
     useEffect(() => {
         const checkFollowingStatus = async () => {
             try {
-                const response = await fetch(`http://localhost:5004/api/profiles/followings/${follower}`);
+                let response;
+                if (role === 'بازیکن') {
+                    response = await fetch(`http://localhost:5004/api/profiles/following/${following}`);
+                } else if (role === 'طراح') {
+                    response = await fetch(`http://localhost:5004/api/tarrahs/followers/${follower}`);
+                }
+
+                // بررسی اینکه پاسخ معتبر است یا خیر
+                if (!response.ok) {
+                    throw new Error('Failed to fetch following status');
+                }
+
                 const data = await response.json();
 
                 if (data.followings && data.followings.includes(follower)) {
@@ -25,20 +36,31 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
         if (follower && following) {
             checkFollowingStatus(); // Check follow status when component is mounted
         }
+    }, [follower, following, role]);
 
-    }, [follower, following]);
 
     const handleFollow = async () => {
         setIsLoading(true); // Start loading
 
         try {
-            const response = await fetch(`http://localhost:5004/api/profiles/following/${following}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ follower })
-            });
+            let response;
+            if (role === 'بازیکن') {
+                response = await fetch(`http://localhost:5004/api/profiles/following/${following}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ follower }),
+                });
+            } else if (role === 'طراح') {
+                response = await fetch(`http://localhost:5004/api/tarrahs/followers/${following}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ follower }),
+                });
+            }
 
             if (response.ok) {
                 setIsFollowing(true);
@@ -62,7 +84,6 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
     };
 
     const handleCloseClick = () => {
-        console.log("Close button clicked!"); // اضافه کردن لاگ
         if (onClose) {
             onClose();
         }
@@ -75,7 +96,7 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
                 <header>
                     <img src={imageSrc} alt={`Profile of ${following}`} />
                     <h1>{following}</h1>
-                    <h2 className="profile-role">بازیکن</h2>
+                    <h2 className="profile-role">{role}</h2>
                 </header>
                 <div className="profile-bio">
                     <p>{bio}</p>
