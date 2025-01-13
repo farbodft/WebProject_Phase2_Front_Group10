@@ -28,14 +28,17 @@ body {
     border-radius: 8px;
 }
 
-/* Profile card styling */
 .profile-card {
     position: relative;
     width: 300px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: unset;
+    padding: 0; /* اضافه کردن فاصله داخلی */
+    display: flex; /* فعال کردن Flexbox */
+    flex-direction: column; /* مرتب کردن محتوا به صورت ستونی */
+    justify-content: space-between; /* فاصله بین محتوا و پایین */
+    height: 400px; /* ارتفاع مشخص برای کادر */
 }
 
 /* Close button styling */
@@ -56,59 +59,52 @@ body {
     justify-content: center;
 }
 
-/* Profile card header styling */
+/* اصلاح برای وسط‌چین کردن محتوا */
 .profile-card header img {
+    display: block;
+    margin: 10px auto; /* Auto برای وسط‌چین کردن */
     width: 125px;
     border-radius: 50%;
-    margin-left: 29%;
-    margin-top: 5px;
 }
 
 .profile-card h1 {
-    direction: ltr;
     font-size: 24px;
     color: #A0DBE0;
-    text-shadow: none;
-    align-content: center;
-    margin-left: 39%;
-    margin-top: 5px;
-    justify-content: center;
-    text-justify: distribute-all-lines;
+    text-align: center; /* تراز کردن متن به مرکز */
+    margin: 10px 0;
 }
+
 .profile-card h2 {
-    direction: rtl;
     font-size: 17px;
     color: #888;
-    text-shadow: none;
-    margin-right: 43%;
+    text-align: center; /* تراز کردن متن به مرکز */
+    margin: 5px 0;
 }
-/* Profile bio paragraph styling */
+
 .profile-card .profile-bio p {
+    font-size: 18px !important;
+    color: #bbbbbb !important;
+    text-align: center; /* تغییر به مرکز */
+    margin: 10px 20px;
     direction: rtl;
-    font-size: 18px !important; /* اضافه کردن !important برای اولویت‌بندی بیشتر */
-    color: #bbbbbb !important; /* اضافه کردن !important برای اولویت‌بندی بیشتر */
-    text-align: justify;
-    margin-right: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
 }
 
-
-/* Profile card button styling */
-.button-check{
-    margin-bottom: 27px;
+.button-check {
     background-color: #6c7ae0;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-family: Lalezar;
-    width: 50%;
-    margin-left: 25%;
+    width: 70%; /* عرض کمتر برای دکمه */
     height: 50px;
-    font-size: 26px;
-    top: -5px;
+    font-size: 20px;
+    align-self: center; /* وسط چین کردن دکمه */
+    margin-top: auto; /* ایجاد فضای خودکار از بالا */
+    margin-bottom: 25px; /* فاصله از پایین */
 }
+
+
 
 .button-check:hover {
     background-color: #5a65c1;
@@ -120,7 +116,7 @@ body {
     transform: translateX(-50%);
     border-radius: 5px;
     font-size: 14px;
-    top : 93%;
+    top : 94%;
     width: 300px;
 }
 

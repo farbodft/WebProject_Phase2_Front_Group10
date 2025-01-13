@@ -187,7 +187,7 @@ function PlayerQuestion({ username = "mobina" }) {
                     imageSrc={selectedPlayer.gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
                     following={selectedPlayer.username}
                     role="طراح"
-                    bio="سلام! من یکی از طراح های سوال پیچ هستم، خوشحال میشم سوال ها را به اشتراک بزارم."
+                    bio="سلام! من یکی از طراح های سوال پیچ هستم، خوشحال میشم سوال ها را با بقیه به اشتراک بزارم."
                     follower={username}
                     onClose={handleClose}
                 />

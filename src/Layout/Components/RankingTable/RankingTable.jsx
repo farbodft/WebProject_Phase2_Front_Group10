@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import ProfileContainer from '../ProfileContainer/ProfileContainer';
 import './RankingTable.css';
 
-const RankingTable = ({ username = "mobina" }) => {
+const RankingTable = () => {
     const [players, setPlayers] = useState([]); // لیست بازیکنان
     const [loading, setLoading] = useState(true); // وضعیت بارگذاری
     const [error, setError] = useState(null); // مدیریت خطا
     const [selectedPlayer, setSelectedPlayer] = useState(null); // پروفایل انتخاب‌شده
     const [isProfileVisible, setIsProfileVisible] = useState(false); // وضعیت نمایش پروفایل
-
+    const username = sessionStorage.getItem("username");
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
