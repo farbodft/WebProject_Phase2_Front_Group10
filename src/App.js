@@ -9,7 +9,7 @@ import QuestionPage from './Layout/Views/QuestionPage/QuestionPage';
 import TarrahQuestionManagement from "./Layout/Views/TarrahQuestionManagement/TarrahQuestionManagement";
 import TarrahMain from "./Layout/Views/TarrahMain/TarrahMain";
 import TarrahCategoryManagement from "./Layout/Views/TarrahCategoryManagement/TarrahCategoryManagement";
-
+import Followings from "./Layout/Views/Followings/Followings";
 
 const App = () => {
     return (
@@ -25,7 +25,7 @@ const App = () => {
                 <Route path="/ScoreTable" element={<ScoreTable />} />
                 <Route path="/TarrahQuestionManagement" element={<TarrahQuestionManagement />} />
                 <Route path="/TarrahCategoryManagement" element={<TarrahCategoryManagement />} />
-
+                <Route path="/Followings" element={<Followings />} />
             </Routes>
         </Router>
 
