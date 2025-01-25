@@ -87,6 +87,7 @@
     align-items: center; /* Center the text */
     z-index: 1;
     margin: 0 auto 20px; /* Center and add space below */
+
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Ribbon's shadow */
 }
 
