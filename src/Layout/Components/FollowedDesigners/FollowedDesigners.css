@@ -92,6 +92,7 @@
 
 .title:before,
 .title:after {
+
     content: "";
     position: absolute;
     bottom: -15px;
