@@ -20,7 +20,7 @@ const List = ({ usage }) => {
                     throw new Error(`Failed to fetch! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setItems(usage === "Questions" ? data.questions.map(q => q.text) : data.categories.map(c => c.categoryName)); // Ensure proper mapping
+                setItems(usage === "Questions" ? data.map(q => q.text) : data.map(c => c.categoryName)); // Ensure proper mapping
             } catch (err) {
                 setError(`Error fetching data: ${err.message}`);
             } finally {

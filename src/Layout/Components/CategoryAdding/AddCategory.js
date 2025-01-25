@@ -17,7 +17,7 @@ const AddCategory = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ categoryName: categoryName.trim() }),
+                body: JSON.stringify({ "categoryName": categoryName.trim() }),
             });
 
             const data = await response.json();

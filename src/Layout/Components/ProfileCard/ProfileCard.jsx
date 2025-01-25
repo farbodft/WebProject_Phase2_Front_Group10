@@ -9,7 +9,7 @@ const ProfileCard = ({usage}) => {
     const username = sessionStorage.getItem("username"); // Get the username from sessionStorage
 
     const url = usage === "Player"
-        ? `http://localhost:5004/api/player/${username}`
+        ? `http://localhost:5004/api/profiles/${username}`
         : `http://localhost:5004/api/tarrahs/${username}`;
 
     useEffect(() => {

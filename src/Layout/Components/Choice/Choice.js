@@ -17,7 +17,7 @@ const Choice = () => {
             </div>
             <div className="header">!نقش خودت رو انتخاب کن</div>
             <div className="button-container">
-                <button onClick={() => handleRoleSelection('designer')} className="button">طراح</button>
+                <button onClick={() => handleRoleSelection('tarrah')} className="button">طراح</button>
                 <button onClick={() => handleRoleSelection('player')} className="button secondary">بازیکن</button>
             </div>
         </div>

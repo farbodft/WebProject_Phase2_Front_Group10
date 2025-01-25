@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import LoginForm from '../../Components/LoginForm/LoginForm';
 import RegisterForm from '../../Components/RegisterForm/RegisterForm';
 import Footer from '../../Components/Footer/Footer';
@@ -17,62 +18,50 @@ const LoginPage = () => {
         }
     }, [role, navigate]);
 
-    const handleLoginSubmit = ({ username, password }) => {
-        fetch('http://localhost:5004/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ role, username, password })
-        })
-        .then(response => {
-            if (response.ok) {
-                response.text().then(data => {
-                    setLoginError(''); // پاک کردن پیام خطا در صورت موفقیت
-                    sessionStorage.setItem("username", username); // Save username to sessionStorage
-                    if (role === 'designer') {
-                        navigate('/TarrahMainPage');
-                    } else if (role === 'player') {
-                        navigate('/PlayerMainPage');
-                    }
-                });
-            } else {
-                response.text().then(data => setLoginError(data));
+    const handleLoginSubmit = async ({ username, password }) => {
+        try {
+            const response = await axios.post('http://localhost:5004/api/auth/login', {
+                role,
+                username,
+                password
+            });
+
+            setLoginError(''); // پاک کردن پیام خطا در صورت موفقیت
+            sessionStorage.setItem("username", username); // Save username to sessionStorage
+
+            if (role === 'tarrah') {
+                navigate('/TarrahMainPage');
+            } else if (role === 'player') {
+                navigate('/PlayerMainPage');
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            setLoginError('An error occurred. Please try again later.');
-        });
+        } catch (error) {
+            console.error('Error during login:', error.response ? error.response.data : error.message);
+            setLoginError(error.response ? error.response.data : 'An error occurred. Please try again later.');
+        }
     };
 
-    const handleRegisterSubmit = ({ username, password, email, gender }) => {
-        fetch('http://localhost:5004/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ role, username, password, email, gender })
-        })
-        .then(response => {
-            if (response.ok) {
-                response.text().then(data => {
-                    setRegisterError(''); // پاک کردن پیام خطا در صورت موفقیت
-                    sessionStorage.setItem("username", username); // Save username to sessionStorage
-                    if (role === 'designer') {
-                        navigate('/TarrahMainPage');
-                    } else if (role === 'player') {
-                        navigate('/PlayerMainPage');
-                    }
-                });
-            } else {
-                response.text().then(data => setRegisterError(data));
+    const handleRegisterSubmit = async ({ username, password, email, gender }) => {
+        try {
+            const response = await axios.post('http://localhost:5004/api/auth/register', {
+                role,
+                username,
+                password,
+                email,
+                gender
+            });
+
+            setRegisterError(''); // پاک کردن پیام خطا در صورت موفقیت
+            sessionStorage.setItem("username", username); // Save username to sessionStorage
+
+            if (role === 'tarrah') {
+                navigate('/TarrahMainPage');
+            } else if (role === 'player') {
+                navigate('/PlayerMainPage');
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            setRegisterError('An error occurred. Please try again later.');
-        });
+        } catch (error) {
+            console.error('Error during registration:', error.response ? error.response.data : error.message);
+            setRegisterError(error.response ? error.response.data : 'An error occurred. Please try again later.');
+        }
     };
 
     return (
