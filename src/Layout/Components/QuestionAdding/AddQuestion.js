@@ -12,7 +12,7 @@ const AddQuestion = () => {
     const [category, setCategory] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
     const [correctChoice, setCorrectChoice] = useState(null);
-
+    const [addingError, setAddingError] = useState(" ");
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -33,19 +33,19 @@ const AddQuestion = () => {
 
     const handleSubmit = async () => {
         if (!text) {
-            alert("لطفا صورت سوال را وارد کنید.");
+            setAddingError(".لطفا صورت سوال را وارد کنید");
             return;
         } else if (!choice1 || !choice2 || !choice3 || !choice4) {
-            alert("لطفا گزینه ها را وارد کنید.");
+            setAddingError(".لطفا گزینه ها را وارد کنید");
             return;
         } else if (!category) {
-            alert("لطفا دسته بندی سوال را مشخص کنید.");
+            setAddingError(".لطفا دسته بندی سوال را مشخص کنید");
             return;
         } else if (!difficulty) {
-            alert("لطفا درجه سختی را مشخص کنید.");
+            setAddingError(".لطفا درجه سختی را مشخص کنید");
             return;
         } else if (!correctChoice) {
-            alert("لطفا گزینه ی درست را مشخص کنید.");
+            setAddingError(".لطفا گزینه ی درست را مشخص کنید");
             return;
         }
 
@@ -71,10 +71,9 @@ const AddQuestion = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            alert("سوال با موفقیت اضافه شد!");
             window.location.reload();
         } catch (err) {
-            alert(`ارور در افزودن سوال: ${err.message}`);
+            setAddingError(`ارور در افزودن سوال: ${err.message}`);
             console.log(err);
         }
     };
@@ -158,6 +157,7 @@ const AddQuestion = () => {
             <button className="container_buttons" style={{ top: "80%" }} onClick={handleSubmit}>
                 طرح سوال
             </button>
+            {addingError && <div className="error" style={{marginTop: "18%"}}>{addingError}</div>}
         </div>
     );
 };

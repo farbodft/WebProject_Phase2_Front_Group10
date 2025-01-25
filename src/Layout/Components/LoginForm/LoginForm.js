@@ -31,7 +31,7 @@ const LoginForm = ({ onSubmit, error }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                {error && <div style={{ color: 'red', marginTop: '5px' }}>{error}</div>}
+                {error && <div style={{ fontFamily: 'Lalezar', fontWeight: 'bold', color: 'red', marginTop: '5px' }}>{error}</div>}
                 <button type="submit">ورود</button>
             </form>
         </div>

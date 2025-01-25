@@ -6,7 +6,7 @@ const QuestionContent = () => {
     const location = useLocation();
     const category = location.state?.category;
     const random = location.state?.random;
-    const username = "mobina"; // فرض بر اینکه نام کاربری ثابت باشد
+    const username = sessionStorage.getItem("username");
     const [questions, setQuestions] = useState([]); // ذخیره سوالات
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // شاخص سوال فعلی
     const [loading, setLoading] = useState(true); // حالت بارگذاری
@@ -53,17 +53,29 @@ const QuestionContent = () => {
     const handleAnswerClick = (index) => {
         setSelectedAnswer(index);
         setShowFeedback(true);
-
+        const url = `http://localhost:5004/api/profiles/updateScore/${username}`
+        
         const currentQuestion = questions[currentQuestionIndex];
         const isCorrect = index === currentQuestion.correctChoice;
         const scoreDelta = currentQuestion.difficulty === 'Easy' ? 1 :
                            currentQuestion.difficulty === 'Medium' ? 2 : 3;
 
-        if (isCorrect) {
-            setScore(prevScore => prevScore + scoreDelta);
-        } else {
-            setScore(prevScore => prevScore - scoreDelta);
-        }
+        const newScore = isCorrect ? score + scoreDelta : score - scoreDelta;
+        setScore(newScore);
+
+        const requestbody = {
+            score: newScore,
+            text: currentQuestion.text,
+            answer: isCorrect
+        };
+
+        fetch(url, {
+            method: `PUT`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestbody),
+        });
 
         setTimeout(() => {
             setShowFeedback(false);

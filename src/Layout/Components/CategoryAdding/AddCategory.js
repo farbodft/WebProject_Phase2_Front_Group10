@@ -3,10 +3,11 @@ import './AddCategory.css';
 
 const AddCategory = () => {
     const [categoryName, setCategoryName] = useState("");
+    const [addingError, setAddingError] = useState(" ");
 
     const handleSubmit = async () => {
         if (!categoryName.trim()) {
-            alert("لطفاً یک نام برای دسته‌بندی وارد کنید.");
+            setAddingError(".لطفاً یک نام برای دسته‌بندی وارد کنید");
             return;
         }
 
@@ -22,12 +23,14 @@ const AddCategory = () => {
             const data = await response.json();
 
             if (response.status === 201) {
-                alert(data.message); // Success message
+                //alert(data.message); // Success message
+                setAddingError(" ");
                 window.location.reload();
             } else if (response.status === 409) {
-                alert(data.message); // Duplicate category message
+                //alert(data.message); // Duplicate category message
+                setAddingError(data.message);
             } else {
-                alert("مشکلی پیش آمده است، لطفاً دوباره تلاش کنید.");
+                setAddingError(".مشکلی پیش آمده است، لطفاً دوباره تلاش کنید");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -49,6 +52,7 @@ const AddCategory = () => {
             <button className="container_buttons" onClick={handleSubmit}>
                 ثبت دسته بندی
             </button>
+            {addingError && <div className="error">{addingError}</div>}
         </div>
     );
 };

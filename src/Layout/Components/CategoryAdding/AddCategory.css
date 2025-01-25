@@ -121,6 +121,12 @@ body {
     direction: rtl;
 }
 
+.error {
+    font-family: 'Lalezar';
+    color: #132C47;
+    font-weight: bold;
+    margin-top: 50%;
+}
 input.question_marks {
     font-family: Lalezar;
     font-size: 1.2em;
