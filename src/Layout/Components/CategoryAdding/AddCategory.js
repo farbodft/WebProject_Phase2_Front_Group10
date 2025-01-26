@@ -20,7 +20,7 @@ const AddCategory = () => {
                 body: JSON.stringify({ "categoryName": categoryName.trim() }),
             });
 
-            const data = await response.json();
+            const data = await response.text();
 
             if (response.status === 201) {
                 //alert(data.message); // Success message
@@ -28,13 +28,14 @@ const AddCategory = () => {
                 window.location.reload();
             } else if (response.status === 409) {
                 //alert(data.message); // Duplicate category message
-                setAddingError(data.message);
+                setAddingError(data);
             } else {
                 setAddingError(".مشکلی پیش آمده است، لطفاً دوباره تلاش کنید");
             }
         } catch (error) {
-            console.error("Error:", error);
+            // console.log("Error:", error);
             alert("مشکلی در برقراری ارتباط با سرور پیش آمده است.");
+            console.log(error);
         }
     };
 

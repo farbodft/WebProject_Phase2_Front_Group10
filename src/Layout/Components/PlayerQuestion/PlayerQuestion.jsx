@@ -20,8 +20,8 @@ function PlayerQuestion({ username = "mobina" }) {
         fetch("http://localhost:5004/api/categories")
             .then((response) => response.json())
             .then((data) => {
-                if (data.categories && Array.isArray(data.categories)) {
-                    setCategories(data.categories);
+                if (data && Array.isArray(data)) {
+                    setCategories(data);
                 } else {
                     console.error("داده‌های دسته‌بندی‌ها صحیح نیستند:", data);
                 }
@@ -156,13 +156,13 @@ function PlayerQuestion({ username = "mobina" }) {
                     <ul className="question-items">
                         {answeredQuestions.length > 0 ? (
                             answeredQuestions.map((question, index) => {
-                                fetchFounderInfo(question.founder);
+                                fetchFounderInfo(question.tarrahName);
 
                                 return (
                                     <li key={index} className={question.answered ? "true" : "false"}>
-                                        {foundersInfo[question.founder] && (
+                                        {foundersInfo[question.tarrahName] && (
                                             <img
-                                                src={foundersInfo[question.founder].gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
+                                                src={foundersInfo[question.tarrahName].gender === "Male" ? "/photo/man-user.png" : "/photo/woman-user.png"}
                                                 alt="تصویر طراح"
                                                 style={{
                                                     width: "30px",
@@ -171,7 +171,7 @@ function PlayerQuestion({ username = "mobina" }) {
                                                     marginRight: "10px",
                                                     cursor: "pointer",
                                                 }}
-                                                onClick={() => handleProfileClick(foundersInfo[question.founder])}
+                                                onClick={() => handleProfileClick(foundersInfo[question.tarrahName])}
                                             />
                                         )}
                                         {question.text}

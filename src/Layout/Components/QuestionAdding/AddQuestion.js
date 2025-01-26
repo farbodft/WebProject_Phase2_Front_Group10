@@ -22,7 +22,7 @@ const AddQuestion = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setCategories(data.categories.map(c => c.categoryName));
+                setCategories(data.map(c => c.categoryName));
             } catch (err) {
                 setError(`Error fetching groups: ${err.message}`);
             }
@@ -53,13 +53,13 @@ const AddQuestion = () => {
             category,
             text,
             choices: [choice1, choice2, choice3, choice4],
-            correctChoice: parseInt(correctChoice),
+            correctChoice: parseInt(correctChoice) - 1,
             difficulty,
             tarrahName: sessionStorage.getItem("username"),
         };
 
         try {
-            const response = await fetch("http://localhost:5004/api/questions/add", {
+            let response = await fetch("http://localhost:5004/api/questions/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -70,7 +70,14 @@ const AddQuestion = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
+            let url = "http://localhost:5004/api/tarrahs/increment/" ;
+            url += sessionStorage.getItem("username");
+            response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
             window.location.reload();
         } catch (err) {
             setAddingError(`ارور در افزودن سوال: ${err.message}`);

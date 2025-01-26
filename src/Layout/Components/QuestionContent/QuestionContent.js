@@ -25,9 +25,9 @@ const QuestionContent = () => {
     useEffect(() => {
         let url;
         if (random) {
-            url = 'http://localhost:5004/api/answering/random';
+            url = 'http://localhost:5004/api/questions/random';
         } else if (category) {
-            url = `http://localhost:5004/api/answering/category/${category}`;
+            url = `http://localhost:5004/api/questions/${category}`;
         } else {
             return;
         }
