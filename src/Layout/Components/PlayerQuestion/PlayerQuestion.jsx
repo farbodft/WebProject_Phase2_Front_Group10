@@ -41,7 +41,7 @@ function PlayerQuestion({ username = "mobina" }) {
             })
             .catch((error) => console.error("خطا در دریافت سوالات:", error));
 
-        fetch(`http://localhost:5004/api/answered-questions/${username}`)
+        fetch(`http://localhost:5004/api/profiles/answeredQuestions/${username}`)
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {
