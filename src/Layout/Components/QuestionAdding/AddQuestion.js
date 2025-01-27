@@ -147,9 +147,9 @@ const AddQuestion = () => {
                     <option value="" disabled>
                         درجه سختی
                     </option>
-                    <option value="simple">ساده</option>
-                    <option value="medium">متوسط</option>
-                    <option value="hard">سخت</option>
+                    <option value="Easy">ساده</option>
+                    <option value="Medium">متوسط</option>
+                    <option value="Hard">سخت</option>
                 </select>
                 <select title="گزینه درست" value={correctChoice} onChange={(e) => setCorrectChoice(e.target.value)} defaultValue="">
                     <option value="" disabled>
