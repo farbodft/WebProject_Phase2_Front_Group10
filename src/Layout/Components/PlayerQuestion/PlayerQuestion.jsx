@@ -4,7 +4,7 @@ import ProfileContainer from "../ProfileContainer/ProfileContainer";
 import FollowedDesignersPopup from "../FollowedDesigners/FollowedDesigners"; // import the new component
 import "./PlayerQuestion.css";
 
-function PlayerQuestion({ username = "mobina" }) {
+function PlayerQuestion() {
     const [categories, setCategories] = useState([]);
     const [questions, setQuestions] = useState([]);
     const [answeredQuestions, setAnsweredQuestions] = useState([]);
@@ -15,6 +15,7 @@ function PlayerQuestion({ username = "mobina" }) {
     const [isProfileVisible, setIsProfileVisible] = useState(false);
     const [isFollowedPopupVisible, setIsFollowedPopupVisible] = useState(false);
     const navigate = useNavigate();
+    const username = sessionStorage.getItem("username");
 
     useEffect(() => {
         fetch("http://localhost:5004/api/categories")
