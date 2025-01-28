@@ -17,6 +17,8 @@ function PlayerQuestion() {
     const navigate = useNavigate();
     const username = sessionStorage.getItem("username");
 
+    const username = sessionStorage.getItem("username");
+
     useEffect(() => {
         fetch("http://localhost:5004/api/categories")
             .then((response) => response.json())
@@ -47,8 +49,8 @@ function PlayerQuestion() {
             .then((data) => {
                 if (Array.isArray(data)) {
                     setAnsweredQuestions(data);
-                } else if (data.answeredQuestions && Array.isArray(data.answeredQuestions)) {
-                    setAnsweredQuestions(data.answeredQuestions);
+                } else if (data && Array.isArray(data)) {
+                    setAnsweredQuestions(data);
                 } else {
                     console.error("داده‌های سوالات پاسخ داده‌شده صحیح نیستند:", data);
                 }
