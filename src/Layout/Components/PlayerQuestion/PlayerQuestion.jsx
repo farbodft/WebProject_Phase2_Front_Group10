@@ -17,7 +17,6 @@ function PlayerQuestion() {
     const navigate = useNavigate();
     const username = sessionStorage.getItem("username");
 
-    const username = sessionStorage.getItem("username");
 
     useEffect(() => {
         fetch("http://localhost:5004/api/categories")
