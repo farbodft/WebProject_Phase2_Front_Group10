@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './AddCategory.css';
+import { useNavigate } from 'react-router-dom';
 
 const AddCategory = () => {
     const [categoryName, setCategoryName] = useState("");
     const [addingError, setAddingError] = useState(" ");
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         if (!categoryName.trim()) {
@@ -25,7 +27,7 @@ const AddCategory = () => {
             if (response.status === 201) {
                 //alert(data.message); // Success message
                 setAddingError(" ");
-                window.location.reload();
+                navigate('/TarrahCategoryManagement');
             } else if (response.status === 409) {
                 //alert(data.message); // Duplicate category message
                 setAddingError(data);

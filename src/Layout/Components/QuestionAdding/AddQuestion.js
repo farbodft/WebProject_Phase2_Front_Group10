@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./AddQuestion.css";
+import { useNavigate } from 'react-router-dom';
 
 const AddQuestion = () => {
     const [categories, setCategories] = useState([]);
@@ -13,6 +14,7 @@ const AddQuestion = () => {
     const [difficulty, setDifficulty] = useState(null);
     const [correctChoice, setCorrectChoice] = useState(null);
     const [addingError, setAddingError] = useState(" ");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -78,7 +80,7 @@ const AddQuestion = () => {
                     "Content-Type": "application/json",
                 }
             });
-            window.location.reload();
+            navigate('/TarrahQuestionManagement');
         } catch (err) {
             setAddingError(`ارور در افزودن سوال: ${err.message}`);
             console.log(err);
