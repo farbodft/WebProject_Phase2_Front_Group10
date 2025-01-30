@@ -27,7 +27,10 @@ const LoginPage = () => {
             });
 
             setLoginError(''); // پاک کردن پیام خطا در صورت موفقیت
-            sessionStorage.setItem("username", username); // Save username to sessionStorage
+            const token = response.data.token;
+            localStorage.setItem('jwtToken', token);
+
+            // sessionStorage.setItem("username", username); // Save username to sessionStorage
 
             if (role === 'tarrah') {
                 navigate('/TarrahMainPage');
@@ -51,7 +54,10 @@ const LoginPage = () => {
             });
 
             setRegisterError(''); // پاک کردن پیام خطا در صورت موفقیت
-            sessionStorage.setItem("username", username); // Save username to sessionStorage
+            const token = response.data.token;
+            localStorage.setItem('jwtToken', token);
+
+            // sessionStorage.setItem("username", username); // Save username to sessionStorage
 
             if (role === 'tarrah') {
                 navigate('/TarrahMainPage');

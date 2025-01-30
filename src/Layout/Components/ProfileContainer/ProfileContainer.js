@@ -8,14 +8,28 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
     const [isPopupVisible, setIsPopupVisible] = useState(false); // Track the popup visibility
     const [isSuccess, setIsSuccess] = useState(false); // Track the success of the follow action
     console.log(following,follower);
+    const token = localStorage.getItem('jwtToken');
+
     useEffect(() => {
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
         const checkFollowingStatus = async () => {
             try {
                 let response;
                 if (role === 'بازیکن') {
-                    response = await fetch(`http://localhost:5004/api/profiles/following/${following}`);
+                    response = await fetch(`http://localhost:5004/api/profiles/following/${following}`, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
                 } else if (role === 'طراح') {
-                    response = await fetch(`http://localhost:5004/api/tarrahs/followers/${follower}`);
+                    response = await fetch(`http://localhost:5004/api/tarrahs/followers/${follower}`, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
                 }
 
                 // بررسی اینکه پاسخ معتبر است یا خیر
@@ -49,6 +63,7 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
                     },
                     body: JSON.stringify({ follower }),
                 });
@@ -57,6 +72,7 @@ const ProfileContainer = ({ imageSrc, following, role, bio, follower, onClose })
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
                     },
                     body: JSON.stringify({ follower }),
                 });

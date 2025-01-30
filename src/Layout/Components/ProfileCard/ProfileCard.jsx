@@ -1,22 +1,34 @@
 import React, {useEffect, useState} from 'react';
+import * as jwt_decode from "jwt-decode";
 import './ProfileCard.css';
 
 const ProfileCard = ({usage}) => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    const username = sessionStorage.getItem("username"); // Get the username from sessionStorage
+    const token = localStorage.getItem('jwtToken');
+    // Decode the JWT token to get the username
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.sub;
 
     const url = usage === "Player"
         ? `http://localhost:5004/api/profiles/${username}`
         : `http://localhost:5004/api/tarrahs/${username}`;
 
     useEffect(() => {
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
+
         // Fetch player data from the server
         const fetchUser = async () => {
             try {
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error("Failed to fetch User data.");
                 }

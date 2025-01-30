@@ -13,11 +13,18 @@ const AddCategory = () => {
             return;
         }
 
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            setAddingError("No token found, please log in");
+            return;
+        }
+
         try {
             const response = await fetch("http://localhost:5004/api/categories/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({ "categoryName": categoryName.trim() }),
             });

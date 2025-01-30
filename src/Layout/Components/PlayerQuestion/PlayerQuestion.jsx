@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileContainer from "../ProfileContainer/ProfileContainer";
+import * as jwt_decode from "jwt-decode";
 import FollowedDesignersPopup from "../FollowedDesigners/FollowedDesigners"; // import the new component
 import "./PlayerQuestion.css";
 
@@ -15,11 +16,22 @@ function PlayerQuestion() {
     const [isProfileVisible, setIsProfileVisible] = useState(false);
     const [isFollowedPopupVisible, setIsFollowedPopupVisible] = useState(false);
     const navigate = useNavigate();
-    const username = sessionStorage.getItem("username");
-
+    const token = localStorage.getItem('jwtToken');
+    // Decode the JWT token to get the username
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.sub;
 
     useEffect(() => {
-        fetch("http://localhost:5004/api/categories")
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
+
+        fetch("http://localhost:5004/api/categories", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 if (data && Array.isArray(data)) {
@@ -30,7 +42,11 @@ function PlayerQuestion() {
             })
             .catch((error) => console.error("خطا در دریافت دسته‌بندی‌ها:", error));
 
-        fetch("http://localhost:5004/api/questions")
+        fetch("http://localhost:5004/api/questions", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 if (data && Array.isArray(data)) {
@@ -43,7 +59,11 @@ function PlayerQuestion() {
             })
             .catch((error) => console.error("خطا در دریافت سوالات:", error));
 
-        fetch(`http://localhost:5004/api/profiles/answeredQuestions/${username}`)
+        fetch(`http://localhost:5004/api/profiles/answeredQuestions/${username}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {
@@ -59,7 +79,11 @@ function PlayerQuestion() {
 
     const fetchFounderInfo = (username) => {
         if (!foundersInfo[username]) {
-            fetch(`http://localhost:5004/api/tarrahs/${username}`)
+            fetch(`http://localhost:5004/api/tarrahs/${username}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
                 .then((response) => response.json())
                 .then((data) => {
                     setFoundersInfo((prev) => ({

@@ -6,16 +6,26 @@ const List = ({ usage }) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Determine JSON path based on usage prop
+    // Determine API path based on usage prop
     const url = usage === "Questions"
         ? "http://localhost:5004/api/questions"
         : "http://localhost:5004/api/categories";
 
+
     // Fetch data from the JSON file
     useEffect(() => {
+        const token = localStorage.getItem('jwtToken');
+        if (!token) {
+            setError("No token found, please log in");
+            return;
+        }
         const fetchData = async () => {
             try {
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error(`Failed to fetch! Status: ${response.status}`);
                 }

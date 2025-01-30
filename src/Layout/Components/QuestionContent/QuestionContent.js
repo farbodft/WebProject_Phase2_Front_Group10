@@ -1,28 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './QuestionContent.css';
+import * as jwt_decode from "jwt-decode";
 
 const QuestionContent = () => {
     const location = useLocation();
     const category = location.state?.category;
     const random = location.state?.random;
-    const username = sessionStorage.getItem("username");
     const [questions, setQuestions] = useState([]); // ذخیره سوالات
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // شاخص سوال فعلی
     const [loading, setLoading] = useState(true); // حالت بارگذاری
     const [selectedAnswer, setSelectedAnswer] = useState(null); // ذخیره پاسخ انتخاب شده
     const [showFeedback, setShowFeedback] = useState(false); // نمایش بازخورد
     const [score, setScore] = useState(0); // ذخیره امتیاز
+    const token = localStorage.getItem('jwtToken');
+    // Decode the JWT token to get the username
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.sub;
 
     // گرفتن امتیاز بازیکن
     useEffect(() => {
-        fetch(`http://localhost:5004/api/profiles/${username}`)
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
+
+        fetch(`http://localhost:5004/api/profiles/${username}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => setScore(data.score))
             .catch(error => console.error('Error fetching player score:', error));
     }, [username]);
 
     useEffect(() => {
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
+
         let url;
         if (random) {
             url = 'http://localhost:5004/api/questions/random';
@@ -32,7 +50,11 @@ const QuestionContent = () => {
             return;
         }
 
-        fetch(url)
+        fetch(url, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -73,6 +95,7 @@ const QuestionContent = () => {
             method: `PUT`,
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(requestbody),
         });

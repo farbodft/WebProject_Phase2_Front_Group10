@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddQuestion.css";
 import { useNavigate } from 'react-router-dom';
-
+import * as jwt_decode from "jwt-decode";
 const AddQuestion = () => {
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(null);
@@ -15,11 +15,24 @@ const AddQuestion = () => {
     const [correctChoice, setCorrectChoice] = useState(null);
     const [addingError, setAddingError] = useState(" ");
     const navigate = useNavigate();
+    const token = localStorage.getItem('jwtToken');
+    // Decode the JWT token to get the username
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.sub;
 
     useEffect(() => {
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
+
         const fetchCategories = async () => {
             try {
-                const response = await fetch("http://localhost:5004/api/categories");
+                const response = await fetch("http://localhost:5004/api/categories", {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -57,7 +70,7 @@ const AddQuestion = () => {
             choices: [choice1, choice2, choice3, choice4],
             correctChoice: parseInt(correctChoice) - 1,
             difficulty,
-            tarrahName: sessionStorage.getItem("username"),
+            tarrahName: username,
         };
 
         try {
@@ -65,6 +78,7 @@ const AddQuestion = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(questionData),
             });
@@ -73,11 +87,12 @@ const AddQuestion = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             let url = "http://localhost:5004/api/tarrahs/increment/" ;
-            url += sessionStorage.getItem("username");
+            url += username;
             response = await fetch(url, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 }
             });
             navigate('/TarrahQuestionManagement');

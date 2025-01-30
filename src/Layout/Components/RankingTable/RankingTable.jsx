@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import ProfileContainer from '../ProfileContainer/ProfileContainer';
 import './RankingTable.css';
-
+import * as jwt_decode from "jwt-decode";
 const RankingTable = () => {
     const [players, setPlayers] = useState([]); // لیست بازیکنان
     const [loading, setLoading] = useState(true); // وضعیت بارگذاری
     const [error, setError] = useState(null); // مدیریت خطا
     const [selectedPlayer, setSelectedPlayer] = useState(null); // پروفایل انتخاب‌شده
     const [isProfileVisible, setIsProfileVisible] = useState(false); // وضعیت نمایش پروفایل
-    const username = sessionStorage.getItem("username");
+    const token = localStorage.getItem('jwtToken');
+    // Decode the JWT token to get the username
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.sub;
+
     useEffect(() => {
+        if (!token) {
+            console.error("No token found, please log in");
+            return;
+        }
+
         const fetchProfiles = async () => {
             try {
-                const response = await fetch('http://localhost:5004/api/profiles/players');
+                const response = await fetch('http://localhost:5004/api/profiles/players', {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error('Failed to fetch player profiles.');
                 }

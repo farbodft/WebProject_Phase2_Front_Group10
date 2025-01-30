@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
+import * as jwt_decode from "jwt-decode";
 import "./FollowedDesigners.css";
 
 function FollowedDesigners() {
     const [followedDesigners, setFollowedDesigners] = useState([]);
-    const username = sessionStorage.getItem("username");
+    const [error, setError] = useState(null);
+    // Decode the JWT token to get the username
+    const token = localStorage.getItem('jwtToken');
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.sub;
+
     useEffect(() => {
-        fetch(`http://localhost:5004/api/tarrahs/followingsQuestions/${username}`)
+        if (!token) {
+            console.error("No token found, please log in");
+            setError("No token found, please log in");
+            return;
+        }
+
+        fetch(`http://localhost:5004/api/tarrahs/followingsQuestions/${username}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {
